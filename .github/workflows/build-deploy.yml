@@ -56,3 +56,4 @@ jobs:
         password: ${{ secrets.FTP_PASS }}
         local-dir: web/
         server-dir: /public_html/
+        protocol: ftps
