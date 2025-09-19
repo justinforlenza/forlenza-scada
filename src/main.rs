@@ -105,7 +105,7 @@ fn get_version_string(major: DWORD, minor: DWORD) -> String {
 
 fn main() {
     let args: Vec<String> = std::env::args().collect();
-    let dev_mode = args.iter().any(|arg| arg == "--dev");
+    let dev_mode = args.iter().any(|arg| arg == "--bypass");
 
     let (major, minor) = get_windows_version();
 
@@ -119,14 +119,24 @@ fn main() {
     // If we're here, we're on Windows 7 or earlier, or dev mode is enabled - run the SCADA application
     let html_content = include_str!("scada_ui.html");
 
-    web_view::builder()
+    let wv =web_view::builder()
         .title("Forlenza Industrial SCADA Control System v2.1")
         .content(Content::Html(html_content))
-        .size(1280, 800)
         .resizable(true)
         .debug(false)
         .user_data(())
         .invoke_handler(|_webview, _arg| Ok(()))
-        .run()
+        .build()
         .unwrap();
+
+    let handle = wv.handle();
+
+    handle.dispatch(|webview| {
+        webview.set_maximized(true);
+        Ok(())
+    }).unwrap();
+
+
+    wv.run().unwrap();
+
 }
