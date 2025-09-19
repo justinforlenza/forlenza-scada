@@ -320,8 +320,6 @@
             background-color: #ff0000;
             bottom: 0;
             left: 50%;
-            transform-origin: bottom center;
-            transform: rotate(-45deg);
         }
 
         .gauge-value {
@@ -579,6 +577,39 @@
         setInterval(updateClock, 1000);
         updateClock();
 
+        // IE8-compatible needle rotation function
+        function rotateNeedle(elementId, degrees) {
+            var element = document.getElementById(elementId);
+
+            // Check if browser supports standard transform
+            if (element.style.transform !== undefined) {
+                element.style.transform = 'rotate(' + degrees + 'deg)';
+            }
+            // IE8 fallback using filter
+            else if (element.style.filter !== undefined) {
+                // Convert degrees to radians for IE8 matrix
+                var radians = degrees * (Math.PI / 180);
+                var cos = Math.cos(radians);
+                var sin = Math.sin(radians);
+
+                // IE8 Matrix filter for rotation
+                element.style.filter = 'progid:DXImageTransform.Microsoft.Matrix(' +
+                    'M11=' + cos + ',' +
+                    'M12=' + (-sin) + ',' +
+                    'M21=' + sin + ',' +
+                    'M22=' + cos + ',' +
+                    'SizingMethod="auto expand")';
+
+                // Adjust position to maintain rotation around bottom center
+                var rect = element.parentNode.getBoundingClientRect ? element.parentNode.getBoundingClientRect() : {width: 120, height: 60};
+                var centerX = rect.width ? rect.width / 2 : 60;
+                var centerY = rect.height ? rect.height : 60;
+
+                element.style.left = (centerX - 1) + 'px';
+                element.style.bottom = '0px';
+            }
+        }
+
         // LED blinking
         function toggleLED(id) {
             var led = document.getElementById(id);
@@ -597,7 +628,7 @@
             document.getElementById('reactor-temp').innerHTML = ('0000' + temp.toFixed(1)).slice(-6);
             document.getElementById('tt201').innerHTML = temp.toFixed(1);
             var tempAngle = -45 + (temp - 170) * 4.5;
-            document.getElementById('temp-needle').style.transform = 'rotate(' + tempAngle + 'deg)';
+            rotateNeedle('temp-needle', tempAngle);
 
             // Pressure
             var pressure = 2.0 + Math.random() * 1.0;
@@ -605,14 +636,14 @@
             document.getElementById('sys-pressure').innerHTML = ('00' + pressure.toFixed(2)).slice(-6);
             document.getElementById('pt101').innerHTML = pressure.toFixed(2);
             var pressAngle = -45 + (pressure - 2.0) * 90;
-            document.getElementById('pressure-needle').style.transform = 'rotate(' + pressAngle + 'deg)';
+            rotateNeedle('pressure-needle', pressAngle);
 
             // Flow
             var flow = 800 + Math.random() * 100;
             document.getElementById('flow-value').innerHTML = Math.round(flow) + ' L/m';
             document.getElementById('ft301').innerHTML = flow.toFixed(1);
             var flowAngle = -45 + (flow - 800) * 0.9;
-            document.getElementById('flow-needle').style.transform = 'rotate(' + flowAngle + 'deg)';
+            rotateNeedle('flow-needle', flowAngle);
 
             // Other values
             document.getElementById('coolant-temp').innerHTML = ('0000' + (40 + Math.random() * 10).toFixed(1)).slice(-6);
