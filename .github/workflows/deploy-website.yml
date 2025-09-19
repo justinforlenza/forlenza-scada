@@ -22,3 +22,4 @@ jobs:
         password: ${{ secrets.FTP_PASS }}
         local-dir: web/
         server-dir: /htdocs/
+        exclude: '*.afphoto'
