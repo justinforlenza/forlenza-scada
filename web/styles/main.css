@@ -30,6 +30,54 @@ h3 {
     background-color: #f0f0f0;
 }
 
+/* Navigation Bar */
+.navbar {
+    background-color: #000080;
+    padding: 0;
+    margin: 0;
+    border-top: 1px solid #4040ff;
+    border-bottom: 2px solid #000040;
+}
+
+.navbar table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar td {
+    background-color: #000080;
+    border-right: 1px solid #4040ff;
+    border-left: 1px solid #000040;
+    text-align: center;
+    padding: 8px 0;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.navbar td:hover {
+    background-color: #0000cc;
+}
+
+.navbar a {
+    color: #ffffff;
+    text-decoration: none;
+    display: block;
+    width: 100%;
+    height: 100%;
+    padding: 0;
+}
+
+.navbar a:visited {
+    color: #ffffff;
+}
+
+.navbar a:hover {
+    color: #ffff00;
+    text-decoration: none;
+}
+
 .logo {
     float: left;
     margin-top: 25px;
