@@ -1,0 +1,24 @@
+name: Deploy Website
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'web/**'
+
+jobs:
+  deploy-website:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Deploy to FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.FTP_HOST }}
+        username: ${{ secrets.FTP_USER }}
+        password: ${{ secrets.FTP_PASS }}
+        local-dir: web/
+        server-dir: /htdocs/
