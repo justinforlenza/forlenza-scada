@@ -1,6 +1,6 @@
 # Forlenza Industrial SCADA Control System
 
-The Forlenza Industrial SCADA Control System v2.1 simulates a realistic industrial control interface, designed to demonstrate common compatibility issues found in legacy SCADA systems. This application is ideal for virtualization demonstrations and educational purposes.
+The Forlenza Industrial SCADA Control System simulates a realistic industrial control interface, designed to demonstrate common compatibility issues found in legacy SCADA systems. This application is ideal for virtualization demonstrations and educational purposes.
 
 ## Features
 
