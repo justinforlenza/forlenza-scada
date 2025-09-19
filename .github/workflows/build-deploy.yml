@@ -1,4 +1,4 @@
-name: Build and Upload Rust App
+name: Build Rust Application and Deploy Website
 
 on:
   push:
@@ -55,4 +55,4 @@ jobs:
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
         local-dir: web/
-        server-dir: /htdocs/
+        server-dir: /public_html/

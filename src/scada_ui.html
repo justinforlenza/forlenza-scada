@@ -1,4 +1,36 @@
 <!DOCTYPE html>
+<!--
+    IMPORTANT: IE8 COMPATIBILITY REQUIREMENTS
+    ========================================
+
+    This Mock SCADA interface MUST maintain compatibility with Internet Explorer 8.
+
+    When modifying this file, you MUST adhere to the following restrictions:
+
+    CSS RESTRICTIONS:
+    - NO CSS3 features (border-radius, box-shadow, gradients, transforms, transitions, animations)
+    - NO rgba() colors - use hex colors only (#RRGGBB)
+    - NO :nth-child() selectors - use class-based selectors instead
+    - NO flexbox or grid layouts - use floats, tables, or absolute positioning
+    - NO @media queries for responsive design
+    - NO CSS calc() function
+    - NO multiple background images
+
+    JAVASCRIPT RESTRICTIONS:
+    - NO ES5+ features (forEach, map, filter, reduce, Object.keys, JSON.parse/stringify)
+    - NO addEventListener() - use attachEvent() for IE8 or inline event handlers
+    - NO querySelector/querySelectorAll - use getElementById, getElementsByTagName, getElementsByClassName
+    - NO Array.isArray() - use typeof check instead
+    - NO console.log() - IE8 console may not exist
+    - NO strict mode ("use strict")
+    - NO const/let keywords - use var only
+
+    HTML RESTRICTIONS:
+    - NO HTML5 semantic elements (header, nav, section, article, aside, footer)
+    - NO HTML5 input types (email, url, number, date, etc.) - use text inputs with validation
+    - NO data-* attributes beyond basic usage
+    - NO placeholder attribute on inputs
+-->
 <html>
 
 <head>
