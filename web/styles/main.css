@@ -1,0 +1,242 @@
+/* Forlenza Industrial Systems - Consolidated Stylesheet */
+
+/* Base Styles */
+body {
+    font-family: Times New Roman, Times, serif;
+    background-color: #ffffff;
+    margin: 10px;
+}
+
+h1 {
+    color: #000080;
+    font-size: 24px;
+}
+
+h2 {
+    color: #800000;
+    font-size: 18px;
+}
+
+h3 {
+    color: #000080;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Header Layout */
+.header {
+    border: 2px solid #000080;
+    padding: 10px;
+    background-color: #f0f0f0;
+}
+
+.logo {
+    float: left;
+    margin-top: 25px;
+    margin-right: 15px;
+}
+
+.header-text {
+    float: left;
+}
+
+.clear {
+    clear: both;
+}
+
+/* Footer */
+.footer {
+    font-size: 10px;
+    color: #808080;
+    border-top: 1px solid #c0c0c0;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+/* Links */
+a {
+    color: #0000ff;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #800080;
+}
+
+a:hover {
+    color: #ff0000;
+}
+
+/* Tables */
+table {
+    border-collapse: collapse;
+}
+
+/* Home Page Styles */
+.download-box {
+    border: 1px solid #808080;
+    background-color: #ffffcc;
+    padding: 15px;
+    margin: 10px 0;
+}
+
+.testimonial-box {
+    border: 1px solid #c0c0c0;
+    background-color: #f9f9f9;
+    padding: 12px;
+    margin: 10px 0;
+    font-style: italic;
+}
+
+.testimonial-author {
+    text-align: right;
+    font-style: normal;
+    font-weight: bold;
+    margin-top: 8px;
+    font-size: 12px;
+}
+
+.requirements {
+    background-color: #f5f5f5;
+    border-left: 4px solid #cccccc;
+    padding: 10px;
+    font-size: 12px;
+}
+
+.operations-link {
+    background-color: #e6f2ff;
+    border: 1px solid #0066cc;
+    padding: 8px;
+    margin: 10px 0;
+}
+
+/* Contact Page Styles */
+.contact-box {
+    border: 1px solid #808080;
+    background-color: #f8f8f8;
+    padding: 15px;
+    margin: 15px 0;
+}
+
+.office-box {
+    border: 1px solid #c0c0c0;
+    background-color: #fffff0;
+    padding: 12px;
+    margin: 10px 0;
+    width: 45%;
+    float: left;
+    margin-right: 3%;
+}
+
+.form-table {
+    width: 100%;
+}
+
+.form-table td {
+    padding: 5px;
+    font-size: 12px;
+}
+
+.form-label {
+    text-align: right;
+    font-weight: bold;
+    width: 120px;
+}
+
+input[type="text"], input[type="email"], select {
+    width: 250px;
+    font-family: Times New Roman, Times, serif;
+    font-size: 12px;
+    padding: 2px;
+}
+
+textarea {
+    width: 400px;
+    height: 100px;
+    font-family: Times New Roman, Times, serif;
+    font-size: 12px;
+    padding: 2px;
+}
+
+input[type="submit"], input[type="reset"] {
+    padding: 4px 12px;
+    font-family: Times New Roman, Times, serif;
+    font-size: 12px;
+    background-color: #e0e0e0;
+    border: 2px solid;
+    border-color: #ffffff #808080 #808080 #ffffff;
+    cursor: pointer;
+}
+
+input[type="submit"]:active, input[type="reset"]:active {
+    border-color: #808080 #ffffff #ffffff #808080;
+}
+
+.map-placeholder {
+    width: 100%;
+    height: 200px;
+    border: 1px solid #808080;
+    background-color: #f0f0f0;
+    text-align: center;
+    line-height: 200px;
+    color: #808080;
+    margin: 10px 0;
+}
+
+.emergency {
+    background-color: #ffcccc;
+    border: 2px solid #ff0000;
+    padding: 10px;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+/* Products Page Styles */
+.product-box {
+    border: 1px solid #808080;
+    background-color: #f8f8f8;
+    padding: 12px;
+    margin: 15px 0;
+}
+
+.price-box {
+    float: right;
+    background-color: #ffffcc;
+    border: 1px solid #cccc00;
+    padding: 8px;
+    margin-left: 10px;
+    font-weight: bold;
+}
+
+.feature-list {
+    margin-left: 20px;
+    font-size: 12px;
+}
+
+.comparison-table {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.comparison-table th {
+    background-color: #000080;
+    color: #ffffff;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.comparison-table td {
+    border: 1px solid #c0c0c0;
+    padding: 4px;
+    font-size: 12px;
+}
+
+.check {
+    color: #008000;
+    font-weight: bold;
+}
+
+.cross {
+    color: #ff0000;
+    font-weight: bold;
+}
