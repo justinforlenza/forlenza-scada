@@ -473,26 +473,90 @@
         }
 
         /* Process mimic */
-        .pipe-horizontal {
-            height: 6px;
-            background-color: #c0c0c0;
-            border: 1px solid #000000;
+        .process-mimic {
+            height: 120px;
+            background-color: #f0f0f0;
+            border: 2px solid;
+            border-color: #808080 #ffffff #ffffff #808080;
             position: relative;
+            margin: 4px;
+        }
+
+        .pipe-horizontal {
+            height: 4px;
+            background-color: #0080ff;
+            border: 1px solid #000000;
+            position: absolute;
         }
 
         .pipe-vertical {
-            width: 6px;
-            background-color: #c0c0c0;
+            width: 4px;
+            background-color: #0080ff;
             border: 1px solid #000000;
-            position: relative;
-            display: inline-block;
+            position: absolute;
+        }
+
+        .pipe-recycle {
+            background-color: #ffff00;
+        }
+
+        .pipe-product {
+            background-color: #00ff00;
         }
 
         .flow-arrow {
             position: absolute;
             color: #ff0000;
-            font-size: 12px;
+            font-size: 10px;
             font-weight: bold;
+            background-color: #ffffff;
+            border: 1px solid #000000;
+            padding: 0 2px;
+        }
+
+        .equipment-tank {
+            width: 25px;
+            height: 35px;
+            background-color: #c0c0c0;
+            border: 2px solid #000000;
+            position: absolute;
+        }
+
+        .equipment-pump {
+            width: 20px;
+            height: 20px;
+            background-color: #80ff80;
+            border: 2px solid #000000;
+            position: absolute;
+            text-align: center;
+            font-size: 10px;
+            font-weight: bold;
+            line-height: 16px;
+        }
+
+        .equipment-valve {
+            width: 12px;
+            height: 12px;
+            background-color: #ffff80;
+            border: 2px solid #000000;
+            position: absolute;
+        }
+
+        .equipment-reactor {
+            width: 40px;
+            height: 45px;
+            background-color: #ff8080;
+            border: 2px solid #000000;
+            position: absolute;
+        }
+
+        .equipment-label {
+            position: absolute;
+            font-size: 8px;
+            font-weight: bold;
+            background-color: #ffffff;
+            padding: 1px 2px;
+            border: 1px solid #000000;
         }
 
         /* Motor status */
@@ -803,19 +867,63 @@
 
                 <div class="panel">
                     <div class="panel-title">PROCESS MIMIC</div>
-                    <div style="position: relative; height: 80px; margin: 8px;">
-                        <div class="pipe-horizontal" style="width: 60px; top: 20px; left: 10px;"></div>
-                        <div class="flow-arrow" style="top: 15px; left: 35px;">→</div>
-                        <div class="pipe-vertical" style="height: 40px; top: 20px; left: 70px;"></div>
-                        <div class="flow-arrow" style="top: 35px; left: 65px;">↓</div>
-                        <div class="pipe-horizontal" style="width: 80px; top: 60px; left: 70px;"></div>
-                        <div class="flow-arrow" style="top: 55px; left: 110px;">→</div>
-                        <div class="pipe-vertical" style="height: 30px; top: 30px; left: 150px;"></div>
-                        <div class="flow-arrow" style="top: 45px; left: 145px;">↑</div>
+                    <div class="process-mimic">
+                        <!-- Feed Tank FT-01 -->
+                        <div class="equipment-tank" style="top: 30px; left: 15px;"></div>
+                        <div class="equipment-label" style="top: 70px; left: 12px;">FT-01</div>
 
-                        <div style="position: absolute; top: 5px; left: 10px; font-size: 9px;">INLET</div>
-                        <div style="position: absolute; top: 65px; left: 160px; font-size: 9px;">OUTLET</div>
-                        <div style="position: absolute; top: 40px; left: 80px; font-size: 9px; background: #c0c0c0; border: 1px solid #000; padding: 1px;">REACTOR</div>
+                        <!-- Feed line from tank -->
+                        <div class="pipe-horizontal" style="width: 20px; top: 45px; left: 40px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 45px;">→</div>
+
+                        <!-- Feed Pump P-01 -->
+                        <div class="equipment-pump" style="top: 37px; left: 65px;">P</div>
+                        <div class="equipment-label" style="top: 60px; left: 62px;">P-01</div>
+
+                        <!-- Line to Control Valve -->
+                        <div class="pipe-horizontal" style="width: 15px; top: 45px; left: 90px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 95px;">→</div>
+
+                        <!-- Control Valve FV-101 -->
+                        <div class="equipment-valve" style="top: 39px; left: 110px;"></div>
+                        <div class="equipment-label" style="top: 60px; left: 105px;">FV-101</div>
+
+                        <!-- Line to Reactor -->
+                        <div class="pipe-horizontal" style="width: 20px; top: 45px; left: 125px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 130px;">→</div>
+
+                        <!-- Reactor R-01 -->
+                        <div class="equipment-reactor" style="top: 25px; left: 150px;"></div>
+                        <div class="equipment-label" style="top: 75px; left: 162px;">R-01</div>
+
+                        <!-- Product line from reactor -->
+                        <div class="pipe-horizontal pipe-product" style="width: 20px; top: 45px; left: 195px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 200px;">→</div>
+
+                        <!-- Product Valve PV-102 -->
+                        <div class="equipment-valve" style="top: 39px; left: 220px;"></div>
+                        <div class="equipment-label" style="top: 60px; left: 215px;">PV-102</div>
+
+                        <!-- Line to Product Tank -->
+                        <div class="pipe-horizontal pipe-product" style="width: 15px; top: 45px; left: 235px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 240px;">→</div>
+
+                        <!-- Product Tank PT-01 -->
+                        <div class="equipment-tank" style="top: 30px; left: 255px;"></div>
+                        <div class="equipment-label" style="top: 70px; left: 252px;">PT-01</div>
+
+                        <!-- Recirculation line -->
+                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 50px; left: 170px;"></div>
+                        <div class="pipe-horizontal pipe-recycle" style="width: 115px; top: 75px; left: 55px;"></div>
+                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 50px; left: 75px;"></div>
+                        <div class="flow-arrow" style="top: 71px; left: 100px;">←</div>
+                        <div class="flow-arrow" style="top: 56px; left: 166px;">↓</div>
+                        <div class="flow-arrow" style="top: 56px; left: 71px;">↑</div>
+
+                        <!-- Flow indicators -->
+                        <div style="position: absolute; top: 25px; left: 45px; font-size: 8px; color: #0000ff;">850 L/m</div>
+                        <div style="position: absolute; top: 25px; left: 200px; font-size: 8px; color: #008000;">620 L/m</div>
+                        <div style="position: absolute; top: 85px; left: 100px; font-size: 8px; color: #cccc00;">230 L/m</div>
                     </div>
                 </div>
             </div>
