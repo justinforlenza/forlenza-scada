@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+    <title>Forlenza Industrial Systems - Technical Support</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="X-UA-Compatible" content="IE=8">
+    <link rel="stylesheet" type="text/css" href="styles/main.css">
+</head>
+<body>
+    <div class="header">
+        <div class="logo">
+            <img src="images/logo.gif" alt="Forlenza Industrial Systems Logo" width="120">
+        </div>
+        <div class="header-text">
+            <h1>Forlenza Industrial Systems</h1>
+            <p><i>Reliable SCADA Solutions Since 1987</i></p>
+        </div>
+        <div class="clear"></div>
+    </div>
+
+    <h2>Technical Support Center</h2>
+    
+    <div class="support-box">
+        <h3>24/7 Emergency Support Hotline</h3>
+        <p><b>For critical system failures and emergencies:</b><br>
+        Call: 1-800-FORLENZA (1-800-367-5362) and press 1<br>
+    </div>
+
+    <div class="warning-box">
+        <h3>Windows Compatibility Notice</h3>
+        <p><b>Important:</b> Forlenza SCADA v2.1 is designed for Windows 7 and earlier operating systems. 
+        Attempting to run on newer versions will result in compatibility errors. 
+        For newer operating systems, we recommend using Windows 7 in a virtual machine environment. 
+    </div>
+
+    <h2>Support Resources</h2>
+
+    <h3>Downloads & Updates</h3>
+    <table class="download-table" cellspacing="0">
+        <tr>
+            <th>File</th>
+            <th>Version</th>
+            <th>Size</th>
+            <th>Released</th>
+            <th>Description</th>
+        </tr>
+        <tr>
+            <td><a href="ForlenzaSCADA_v2.1.exe">ForlenzaSCADA.exe</a></td>
+            <td>2.1.0</td>
+            <td>4.2 MB</td>
+            <td>03/15/2007</td>
+            <td>Full installation package</td>
+        </tr>
+        <tr>
+            <td><a href="patch_2.1.1.exe">patch_2.1.1.exe</a></td>
+            <td>2.1.1</td>
+            <td>847 KB</td>
+            <td>04/02/2007</td>
+            <td>Critical security update</td>
+        </tr>
+        <tr>
+            <td><a href="operations_guide.pdf">operations_guide.pdf</a></td>
+            <td>2.1</td>
+            <td>8.3 MB</td>
+            <td>03/15/2007</td>
+            <td>Complete operations manual</td>
+        </tr>
+        <tr>
+            <td><a href="quick_start.pdf">quick_start.pdf</a></td>
+            <td>2.1</td>
+            <td>1.2 MB</td>
+            <td>03/15/2007</td>
+            <td>Quick start guide</td>
+        </tr>
+        <tr>
+            <td><a href="modbus_drivers.zip">modbus_drivers.zip</a></td>
+            <td>1.4.2</td>
+            <td>356 KB</td>
+            <td>02/10/2007</td>
+            <td>Modbus driver package</td>
+        </tr>
+    </table>
+
+    <h3>Frequently Asked Questions</h3>
+
+    <div class="faq-question">Q: I get an error message saying "This application requires Windows 7 or earlier" when trying to run SCADA v2.1. What should I do?</div>
+    <div class="faq-answer">
+        <b>A:</b> 
+        Our software is engineered specifically for Windows 7 and earlier to ensure compatibility with legacy industrial equipment. 
+        If you have a newer Windows version, you must run the software in a Windows 7 virtual machine. 
+        We recommend VMware Workstation or VirtualBox.
+    </div>
+
+    <div class="faq-question">Q: Why doesn't Forlenza support newer version of windows?</div>
+    <div class="faq-answer">
+        <b>A:</b> Many industrial control systems rely on specific Windows 7 drivers and services that Microsoft removed from newer versions.
+        Our software maintains 100% compatibility with thousands of legacy PLCs, sensors, and control systems that cannot be upgraded.
+        This deliberate design choice ensures your existing equipment investments remain protected.
+    </div>
+
+    <div class="faq-question">Q: I get an error "This program can't start because VCRUNTIME140.DLL is missing from your computer" when launching SCADA. How do I fix this?</div>
+    <div class="faq-answer">
+        <b>A:</b> This error indicates you need to install the Microsoft Visual C++ Redistributable package.
+        Download and install the Visual C++ Redistributable from Microsoft's website:
+        <a href="http://aka.ms/vs/17/release/vc_redist.x64.exe">http://aka.ms/vs/17/release/vc_redist.x64.exe</a>.
+        Restart your computer after installation.
+    </div>
+
+    <div class="faq-question">Q: How do I configure communication with my Allen-Bradley PLC?</div>
+    <div class="faq-answer">
+        <b>A:</b> Navigate to Configuration → Communication → Add Device. Select "Allen-Bradley" from the manufacturer list, 
+        choose your model (PLC-5, SLC-500, or ControlLogix), and enter the IP address or serial port settings. 
+        Ensure your RSLinx Classic driver is properly installed. Detailed instructions are in Chapter 4 of the operations guide.
+    </div>
+
+    <div class="faq-question">Q: I'm getting "OPC Server Not Found" errors. How do I fix this?</div>
+    <div class="faq-answer">
+        <b>A:</b> This usually indicates DCOM permissions issues. Run <b>dcomcnfg.exe</b> as Administrator, 
+        navigate to Component Services → Computers → My Computer → DCOM Config, find "Forlenza.OPCServer", 
+        right-click Properties, and ensure "Enable Distributed COM" is checked. Set authentication level to "None" for local connections.
+    </div>
+
+    <div class="faq-question">Q: Can I run multiple SCADA clients connecting to one server?</div>
+    <div class="faq-answer">
+        <b>A:</b> Yes, the Professional Edition supports unlimited client connections. Each client requires a separate HMI Viewer license ($495). 
+        The Standard Edition supports up to 3 concurrent client connections.
+    </div>
+
+    <h3>Known Issues & Workarounds</h3>
+    <ul>
+        <li><b>Issue:</b> Serial communication drops after Windows 7 SP1 installation<br>
+            <b>Workaround:</b> Reinstall serial drivers after SP1 update</li>
+        <li><b>Issue:</b> Memory leak with more than 5,000 active tags<br>
+            <b>Workaround:</b> Apply patch 2.1.1 and restart service daily</li>
+        <li><b>Issue:</b> Report scheduler fails after daylight saving time change<br>
+            <b>Workaround:</b> Manually restart the Report Service after DST transitions</li>
+    </ul>
+
+    <h3>Remote Support Options</h3>
+    <p>Our technicians can connect directly to your system for troubleshooting:</p>
+    <ul>
+        <li><b>Windows Remote Desktop</b></li>
+        <li><b>PCAnywhere</b></li>
+    </ul>
+
+    <div class="footer">
+        <hr>
+        <p>© 2010 Forlenza Industrial Systems, Inc. All rights reserved.<br>
+        Corporate Headquarters: Brooklyn Navy Yard, Building 77, Brooklyn, NY 11205<br>
+        <br>
+        <a href="index.html">Home</a> | <a href="products.html">Products</a> | <a href="support.html">Support</a> | <a href="contact.html">Contact Us</a><br>
+        <br>
+        <i>Support documentation updated Sep 15, 2010</i></p>
+    </div>
+</body>
+</html>

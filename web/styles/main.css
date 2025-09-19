@@ -240,3 +240,57 @@ input[type="submit"]:active, input[type="reset"]:active {
     color: #ff0000;
     font-weight: bold;
 }
+
+.support-box {
+    border: 2px solid #008000;
+    background-color: #f0fff0;
+    padding: 12px;
+    margin: 15px 0;
+}
+
+.warning-box {
+    border: 2px solid #ff0000;
+    background-color: #fff0f0;
+    padding: 12px;
+    margin: 15px 0;
+}
+
+.faq-question {
+    background-color: #e6e6fa;
+    padding: 8px;
+    margin: 10px 0 5px 0;
+    font-weight: bold;
+    border-left: 4px solid #000080;
+}
+
+.faq-answer {
+    padding: 8px 8px 8px 20px;
+    margin-bottom: 10px;
+}
+
+.download-table {
+    width: 100%;
+    border: 1px solid #808080;
+    margin: 10px 0;
+}
+
+.download-table th {
+    background-color: #808080;
+    color: #ffffff;
+    padding: 5px;
+    text-align: left;
+    font-size: 12px;
+}
+
+.download-table td {
+    border: 1px solid #c0c0c0;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.code {
+    font-family: Courier New, monospace;
+    background-color: #f0f0f0;
+    padding: 2px 4px;
+    font-size: 12px;
+}
