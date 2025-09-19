@@ -690,6 +690,197 @@
                     <button class="button" onclick="buttonClick('RESET')">RESET</button>
                     <button class="button emergency" onclick="emergencyStop()">EMERGENCY<br />STOP</button>
                 </div>
+
+                <div class="panel">
+                    <div class="panel-title">VALVE CONTROLS</div>
+                    <div style="text-align: center;">
+                        <div class="valve-control">
+                            <div class="valve-symbol open" id="valve1" onclick="toggleValve('valve1')"></div>
+                            <div class="valve-position">VLV-101<br />OPEN</div>
+                        </div>
+                        <div class="valve-control">
+                            <div class="valve-symbol closed" id="valve2" onclick="toggleValve('valve2')"></div>
+                            <div class="valve-position">VLV-102<br />CLOSED</div>
+                        </div>
+                        <div class="valve-control">
+                            <div class="valve-symbol open" id="valve3" onclick="toggleValve('valve3')"></div>
+                            <div class="valve-position">VLV-103<br />OPEN</div>
+                        </div>
+                        <div class="valve-control">
+                            <div class="valve-symbol closed" id="valve4" onclick="toggleValve('valve4')"></div>
+                            <div class="valve-position">VLV-104<br />CLOSED</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">CONTROL SETPOINTS</div>
+                    <div style="padding: 4px;">
+                        <div style="margin: 4px 0;">
+                            <span style="font-size: 10px; width: 80px; display: inline-block;">TEMP SP:</span>
+                            <input type="text" value="180.0" style="width: 60px; font-size: 10px;" id="temp-sp" />
+                            <span style="font-size: 10px;">°C</span>
+                        </div>
+                        <div style="margin: 4px 0;">
+                            <span style="font-size: 10px; width: 80px; display: inline-block;">PRESS SP:</span>
+                            <input type="text" value="2.50" style="width: 60px; font-size: 10px;" id="press-sp" />
+                            <span style="font-size: 10px;">bar</span>
+                        </div>
+                        <div style="margin: 4px 0;">
+                            <span style="font-size: 10px; width: 80px; display: inline-block;">FLOW SP:</span>
+                            <input type="text" value="850" style="width: 60px; font-size: 10px;" id="flow-sp" />
+                            <span style="font-size: 10px;">L/m</span>
+                        </div>
+                        <div style="margin: 4px 0;">
+                            <span style="font-size: 10px; width: 80px; display: inline-block;">LEVEL SP:</span>
+                            <input type="text" value="70.0" style="width: 60px; font-size: 10px;" id="level-sp" />
+                            <span style="font-size: 10px;">%</span>
+                        </div>
+                        <button class="button" onclick="buttonClick('UPDATE_SP')"
+                            style="margin-top: 4px;">UPDATE</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid-cell center-right-panel">
+                <div class="panel">
+                    <div class="panel-title">PROCESS MIMIC</div>
+                    <div class="process-mimic">
+                        <!-- Feed Tank FT-01 -->
+                        <div class="equipment-tank" style="top: 30px; left: 15px;"></div>
+                        <div class="equipment-label" style="top: 70px; left: 12px;">FT-01</div>
+
+                        <!-- Feed line from tank -->
+                        <div class="pipe-horizontal" style="width: 20px; top: 45px; left: 40px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 45px;">→</div>
+
+                        <!-- Feed Pump P-01 -->
+                        <div class="equipment-pump" style="top: 37px; left: 65px;">P</div>
+                        <div class="equipment-label" style="top: 60px; left: 62px;">P-01</div>
+
+                        <!-- Line to Control Valve -->
+                        <div class="pipe-horizontal" style="width: 15px; top: 45px; left: 90px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 95px;">→</div>
+
+                        <!-- Control Valve FV-101 -->
+                        <div class="equipment-valve" style="top: 39px; left: 110px;"></div>
+                        <div class="equipment-label" style="top: 60px; left: 105px;">FV-101</div>
+
+                        <!-- Line to Reactor -->
+                        <div class="pipe-horizontal" style="width: 20px; top: 45px; left: 125px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 130px;">→</div>
+
+                        <!-- Reactor R-01 -->
+                        <div class="equipment-reactor" style="top: 25px; left: 150px;"></div>
+                        <div class="equipment-label" style="top: 75px; left: 162px;">R-01</div>
+
+                        <!-- Product line from reactor -->
+                        <div class="pipe-horizontal pipe-product" style="width: 20px; top: 45px; left: 195px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 200px;">→</div>
+
+                        <!-- Product Valve PV-102 -->
+                        <div class="equipment-valve" style="top: 39px; left: 220px;"></div>
+                        <div class="equipment-label" style="top: 60px; left: 215px;">PV-102</div>
+
+                        <!-- Line to Product Tank -->
+                        <div class="pipe-horizontal pipe-product" style="width: 15px; top: 45px; left: 235px;"></div>
+                        <div class="flow-arrow" style="top: 41px; left: 240px;">→</div>
+
+                        <!-- Product Tank PT-01 -->
+                        <div class="equipment-tank" style="top: 30px; left: 255px;"></div>
+                        <div class="equipment-label" style="top: 70px; left: 252px;">PT-01</div>
+
+                        <!-- Recirculation line -->
+                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 50px; left: 170px;"></div>
+                        <div class="pipe-horizontal pipe-recycle" style="width: 115px; top: 75px; left: 55px;"></div>
+                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 50px; left: 75px;"></div>
+                        <div class="flow-arrow" style="top: 71px; left: 100px;">←</div>
+                        <div class="flow-arrow" style="top: 56px; left: 166px;">↓</div>
+                        <div class="flow-arrow" style="top: 56px; left: 71px;">↑</div>
+
+                        <!-- Flow indicators -->
+                        <div style="position: absolute; top: 25px; left: 45px; font-size: 8px; color: #0000ff;">850 L/m
+                        </div>
+                        <div style="position: absolute; top: 25px; left: 200px; font-size: 8px; color: #008000;">620 L/m
+                        </div>
+                        <div style="position: absolute; top: 85px; left: 100px; font-size: 8px; color: #cccc00;">230 L/m
+                        </div>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">PROCESS VALUES</div>
+
+                    <div style="text-align: center;">
+                        <div class="gauge-container">
+                            <div class="gauge-label">TEMPERATURE</div>
+                            <div class="gauge-meter">
+                                <div class="gauge-needle" id="temp-needle"></div>
+                            </div>
+                            <div class="gauge-value" id="temp-value">178.5°C</div>
+                        </div>
+
+                        <div class="gauge-container">
+                            <div class="gauge-label">PRESSURE</div>
+                            <div class="gauge-meter">
+                                <div class="gauge-needle" id="pressure-needle"></div>
+                            </div>
+                            <div class="gauge-value" id="pressure-value">2.4 BAR</div>
+                        </div>
+
+                        <div class="gauge-container">
+                            <div class="gauge-label">FLOW RATE</div>
+                            <div class="gauge-meter">
+                                <div class="gauge-needle" id="flow-needle"></div>
+                            </div>
+                            <div class="gauge-value" id="flow-value">847 L/m</div>
+                        </div>
+                    </div>
+
+                    <div style="margin-top: 10px;">
+                        <span class="display-label">REACTOR TEMP:</span>
+                        <span class="digital-display" id="reactor-temp">0185.7</span>
+                        <span class="display-label">COOLANT TEMP:</span>
+                        <span class="digital-display" id="coolant-temp">0045.2</span>
+                        <br />
+                        <span class="display-label">SYSTEM PRESS:</span>
+                        <span class="digital-display" id="sys-pressure">002.45</span>
+                        <span class="display-label">FLOW TOTAL:</span>
+                        <span class="digital-display" id="flow-total">48576</span>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">TREND CHARTS</div>
+                    <div class="trend-chart" id="trend-chart">
+                        <div class="trend-grid"></div>
+                        <canvas id="trend-canvas" width="272" height="112"
+                            style="position: absolute; top: 4px; left: 4px;"></canvas>
+                    </div>
+                    <div style="font-size: 9px; text-align: center; margin-top: 4px;">
+                        <span style="color: #00ff00;">TEMP</span> |
+                        <span style="color: #ffff00;">PRESS</span> |
+                        <span style="color: #ff0000;">FLOW</span> |
+                        <span style="color: #00ffff;">LEVEL</span>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-title">PRODUCTION CHART</div>
+                    <div class="bar-chart" id="bar-chart">
+                        <div class="bar-chart-bar" id="bar1" style="left: 10px; height: 60px;"></div>
+                        <div class="bar-chart-bar" id="bar2" style="left: 35px; height: 45px;"></div>
+                        <div class="bar-chart-bar" id="bar3" style="left: 60px; height: 75px;"></div>
+                        <div class="bar-chart-bar" id="bar4" style="left: 85px; height: 55px;"></div>
+                        <div class="bar-chart-bar" id="bar5" style="left: 110px; height: 80px;"></div>
+                        <div class="bar-chart-bar" id="bar6" style="left: 135px; height: 65px;"></div>
+                        <div class="bar-chart-bar" id="bar7" style="left: 160px; height: 70px;"></div>
+                        <div class="bar-chart-bar" id="bar8" style="left: 185px; height: 50px;"></div>
+                    </div>
+                    <div style="font-size: 9px; text-align: center; margin-top: 4px;">HOURLY PRODUCTION (UNITS)</div>
+                </div>
+
+
             </div>
 
             <div class="grid-cell center-left-panel">
@@ -770,202 +961,32 @@
                     </div>
                 </div>
 
-                <div class="panel">
-                    <div class="panel-title">VALVE CONTROLS</div>
-                    <div style="text-align: center;">
-                        <div class="valve-control">
-                            <div class="valve-symbol open" id="valve1" onclick="toggleValve('valve1')"></div>
-                            <div class="valve-position">VLV-101<br />OPEN</div>
-                        </div>
-                        <div class="valve-control">
-                            <div class="valve-symbol closed" id="valve2" onclick="toggleValve('valve2')"></div>
-                            <div class="valve-position">VLV-102<br />CLOSED</div>
-                        </div>
-                        <div class="valve-control">
-                            <div class="valve-symbol open" id="valve3" onclick="toggleValve('valve3')"></div>
-                            <div class="valve-position">VLV-103<br />OPEN</div>
-                        </div>
-                        <div class="valve-control">
-                            <div class="valve-symbol closed" id="valve4" onclick="toggleValve('valve4')"></div>
-                            <div class="valve-position">VLV-104<br />CLOSED</div>
-                        </div>
-                    </div>
-                </div>
+
             </div>
 
-            <div class="grid-cell center-right-panel">
-                <div class="panel">
-                    <div class="panel-title">PROCESS VALUES</div>
-
-                    <div style="text-align: center;">
-                        <div class="gauge-container">
-                            <div class="gauge-label">TEMPERATURE</div>
-                            <div class="gauge-meter">
-                                <div class="gauge-needle" id="temp-needle"></div>
-                            </div>
-                            <div class="gauge-value" id="temp-value">178.5°C</div>
-                        </div>
-
-                        <div class="gauge-container">
-                            <div class="gauge-label">PRESSURE</div>
-                            <div class="gauge-meter">
-                                <div class="gauge-needle" id="pressure-needle"></div>
-                            </div>
-                            <div class="gauge-value" id="pressure-value">2.4 BAR</div>
-                        </div>
-
-                        <div class="gauge-container">
-                            <div class="gauge-label">FLOW RATE</div>
-                            <div class="gauge-meter">
-                                <div class="gauge-needle" id="flow-needle"></div>
-                            </div>
-                            <div class="gauge-value" id="flow-value">847 L/m</div>
-                        </div>
-                    </div>
-
-                    <div style="margin-top: 10px;">
-                        <span class="display-label">REACTOR TEMP:</span>
-                        <span class="digital-display" id="reactor-temp">0185.7</span>
-                        <span class="display-label">COOLANT TEMP:</span>
-                        <span class="digital-display" id="coolant-temp">0045.2</span>
-                        <br />
-                        <span class="display-label">SYSTEM PRESS:</span>
-                        <span class="digital-display" id="sys-pressure">002.45</span>
-                        <span class="display-label">FLOW TOTAL:</span>
-                        <span class="digital-display" id="flow-total">48576</span>
-                    </div>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-title">TREND CHARTS</div>
-                    <div class="trend-chart" id="trend-chart">
-                        <div class="trend-grid"></div>
-                        <canvas id="trend-canvas" width="272" height="112" style="position: absolute; top: 4px; left: 4px;"></canvas>
-                    </div>
-                    <div style="font-size: 9px; text-align: center; margin-top: 4px;">
-                        <span style="color: #00ff00;">TEMP</span> |
-                        <span style="color: #ffff00;">PRESS</span> |
-                        <span style="color: #ff0000;">FLOW</span> |
-                        <span style="color: #00ffff;">LEVEL</span>
-                    </div>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-title">PRODUCTION CHART</div>
-                    <div class="bar-chart" id="bar-chart">
-                        <div class="bar-chart-bar" id="bar1" style="left: 10px; height: 60px;"></div>
-                        <div class="bar-chart-bar" id="bar2" style="left: 35px; height: 45px;"></div>
-                        <div class="bar-chart-bar" id="bar3" style="left: 60px; height: 75px;"></div>
-                        <div class="bar-chart-bar" id="bar4" style="left: 85px; height: 55px;"></div>
-                        <div class="bar-chart-bar" id="bar5" style="left: 110px; height: 80px;"></div>
-                        <div class="bar-chart-bar" id="bar6" style="left: 135px; height: 65px;"></div>
-                        <div class="bar-chart-bar" id="bar7" style="left: 160px; height: 70px;"></div>
-                        <div class="bar-chart-bar" id="bar8" style="left: 185px; height: 50px;"></div>
-                    </div>
-                    <div style="font-size: 9px; text-align: center; margin-top: 4px;">HOURLY PRODUCTION (UNITS)</div>
-                </div>
-
-                <div class="panel">
-                    <div class="panel-title">PROCESS MIMIC</div>
-                    <div class="process-mimic">
-                        <!-- Feed Tank FT-01 -->
-                        <div class="equipment-tank" style="top: 30px; left: 15px;"></div>
-                        <div class="equipment-label" style="top: 70px; left: 12px;">FT-01</div>
-
-                        <!-- Feed line from tank -->
-                        <div class="pipe-horizontal" style="width: 20px; top: 45px; left: 40px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 45px;">→</div>
-
-                        <!-- Feed Pump P-01 -->
-                        <div class="equipment-pump" style="top: 37px; left: 65px;">P</div>
-                        <div class="equipment-label" style="top: 60px; left: 62px;">P-01</div>
-
-                        <!-- Line to Control Valve -->
-                        <div class="pipe-horizontal" style="width: 15px; top: 45px; left: 90px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 95px;">→</div>
-
-                        <!-- Control Valve FV-101 -->
-                        <div class="equipment-valve" style="top: 39px; left: 110px;"></div>
-                        <div class="equipment-label" style="top: 60px; left: 105px;">FV-101</div>
-
-                        <!-- Line to Reactor -->
-                        <div class="pipe-horizontal" style="width: 20px; top: 45px; left: 125px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 130px;">→</div>
-
-                        <!-- Reactor R-01 -->
-                        <div class="equipment-reactor" style="top: 25px; left: 150px;"></div>
-                        <div class="equipment-label" style="top: 75px; left: 162px;">R-01</div>
-
-                        <!-- Product line from reactor -->
-                        <div class="pipe-horizontal pipe-product" style="width: 20px; top: 45px; left: 195px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 200px;">→</div>
-
-                        <!-- Product Valve PV-102 -->
-                        <div class="equipment-valve" style="top: 39px; left: 220px;"></div>
-                        <div class="equipment-label" style="top: 60px; left: 215px;">PV-102</div>
-
-                        <!-- Line to Product Tank -->
-                        <div class="pipe-horizontal pipe-product" style="width: 15px; top: 45px; left: 235px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 240px;">→</div>
-
-                        <!-- Product Tank PT-01 -->
-                        <div class="equipment-tank" style="top: 30px; left: 255px;"></div>
-                        <div class="equipment-label" style="top: 70px; left: 252px;">PT-01</div>
-
-                        <!-- Recirculation line -->
-                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 50px; left: 170px;"></div>
-                        <div class="pipe-horizontal pipe-recycle" style="width: 115px; top: 75px; left: 55px;"></div>
-                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 50px; left: 75px;"></div>
-                        <div class="flow-arrow" style="top: 71px; left: 100px;">←</div>
-                        <div class="flow-arrow" style="top: 56px; left: 166px;">↓</div>
-                        <div class="flow-arrow" style="top: 56px; left: 71px;">↑</div>
-
-                        <!-- Flow indicators -->
-                        <div style="position: absolute; top: 25px; left: 45px; font-size: 8px; color: #0000ff;">850 L/m</div>
-                        <div style="position: absolute; top: 25px; left: 200px; font-size: 8px; color: #008000;">620 L/m</div>
-                        <div style="position: absolute; top: 85px; left: 100px; font-size: 8px; color: #cccc00;">230 L/m</div>
-                    </div>
-                </div>
-            </div>
 
             <div class="grid-cell right-panel">
                 <div class="panel">
+                    <div class="panel-title">RUNTIME</div>
+                    <div style="padding: 4px; font-size: 11px;">
+                        <div>System: <span id="runtime">147:23:16</span></div>
+                        <div>Batch: <span id="batchtime">008:45:32</span></div>
+                        <div>Cycle: <span id="cycletime">000:12:48</span></div>
+                        <div>Maintenance: <span id="maint-time">72:15:00</span></div>
+                    </div>
+                </div>
+                <div class="panel">
                     <div class="panel-title">MOTOR STATUS</div>
                     <div class="motor-status">
-                        <div class="motor-running">PUMP-01: RUNNING  125.4A  1782RPM</div>
-                        <div class="motor-running">PUMP-02: RUNNING   98.7A  1756RPM</div>
-                        <div class="motor-stopped">PUMP-03: STOPPED    0.0A     0RPM</div>
-                        <div class="motor-running">FAN-01:  RUNNING   45.2A   890RPM</div>
-                        <div class="motor-running">FAN-02:  RUNNING   44.8A   895RPM</div>
+                        <div class="motor-running">PUMP-01: RUNNING 125.4A 1782RPM</div>
+                        <div class="motor-running">PUMP-02: RUNNING 98.7A 1756RPM</div>
+                        <div class="motor-stopped">PUMP-03: STOPPED 0.0A 0RPM</div>
+                        <div class="motor-running">FAN-01: RUNNING 45.2A 890RPM</div>
+                        <div class="motor-running">FAN-02: RUNNING 44.8A 895RPM</div>
                     </div>
                 </div>
 
-                <div class="panel">
-                    <div class="panel-title">CONTROL SETPOINTS</div>
-                    <div style="padding: 4px;">
-                        <div style="margin: 4px 0;">
-                            <span style="font-size: 10px; width: 80px; display: inline-block;">TEMP SP:</span>
-                            <input type="text" value="180.0" style="width: 60px; font-size: 10px;" id="temp-sp" />
-                            <span style="font-size: 10px;">°C</span>
-                        </div>
-                        <div style="margin: 4px 0;">
-                            <span style="font-size: 10px; width: 80px; display: inline-block;">PRESS SP:</span>
-                            <input type="text" value="2.50" style="width: 60px; font-size: 10px;" id="press-sp" />
-                            <span style="font-size: 10px;">bar</span>
-                        </div>
-                        <div style="margin: 4px 0;">
-                            <span style="font-size: 10px; width: 80px; display: inline-block;">FLOW SP:</span>
-                            <input type="text" value="850" style="width: 60px; font-size: 10px;" id="flow-sp" />
-                            <span style="font-size: 10px;">L/m</span>
-                        </div>
-                        <div style="margin: 4px 0;">
-                            <span style="font-size: 10px; width: 80px; display: inline-block;">LEVEL SP:</span>
-                            <input type="text" value="70.0" style="width: 60px; font-size: 10px;" id="level-sp" />
-                            <span style="font-size: 10px;">%</span>
-                        </div>
-                        <button class="button" onclick="buttonClick('UPDATE_SP')" style="margin-top: 4px;">UPDATE</button>
-                    </div>
-                </div>
+
 
                 <div class="panel">
                     <div class="panel-title">ACTIVE ALARMS</div>
@@ -1008,15 +1029,7 @@
                     </table>
                 </div>
 
-                <div class="panel">
-                    <div class="panel-title">RUNTIME</div>
-                    <div style="padding: 4px; font-size: 11px;">
-                        <div>System: <span id="runtime">147:23:16</span></div>
-                        <div>Batch: <span id="batchtime">008:45:32</span></div>
-                        <div>Cycle: <span id="cycletime">000:12:48</span></div>
-                        <div>Maintenance: <span id="maint-time">72:15:00</span></div>
-                    </div>
-                </div>
+
             </div>
         </div>
 
@@ -1025,7 +1038,6 @@
             <span class="status-section">MODE: AUTO</span>
             <span class="status-section">USER: OPERATOR</span>
             <span class="status-section" id="clock">00:00:00</span>
-            <span class="status-section" style="float: right;">Legacy Mode</span>
         </div>
     </div>
 
@@ -1065,7 +1077,7 @@
                     'SizingMethod="auto expand")';
 
                 // Adjust position to maintain rotation around bottom center
-                var rect = element.parentNode.getBoundingClientRect ? element.parentNode.getBoundingClientRect() : {width: 120, height: 60};
+                var rect = element.parentNode.getBoundingClientRect ? element.parentNode.getBoundingClientRect() : { width: 120, height: 60 };
                 var centerX = rect.width ? rect.width / 2 : 60;
                 var centerY = rect.height ? rect.height : 60;
 
