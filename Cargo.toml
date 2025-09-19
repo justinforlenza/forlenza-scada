@@ -1,0 +1,36 @@
+[package]
+name = "forlenza-scada"
+version = "2.1.0"
+edition = "2021"
+authors = ["Forlenza Industrial"]
+description = "Simulates a realistic industrial control interface, designed to demonstrate common compatibility issues found in legacy SCADA systems."
+rust-version = "1.77.0"
+
+[[bin]]
+name = "forlenza-scada"
+path = "src/main.rs"
+
+[dependencies]
+winapi = { version = "0.3", features = [
+    "winuser",
+    "winnt",
+    "sysinfoapi",
+    "libloaderapi",
+    "ntdef",
+    "minwindef",
+    "processthreadsapi",
+    "handleapi",
+    "synchapi",
+    "winbase"
+] }
+web-view = { version = "0.7", default-features = false }
+
+[build-dependencies]
+winres = "0.1"
+
+[profile.release]
+opt-level = "z"     # Optimize for size
+lto = true         # Enable Link Time Optimization
+codegen-units = 1  # Single codegen unit for better optimization
+strip = true       # Strip symbols from binary
+panic = "abort"    # Smaller panic handler
