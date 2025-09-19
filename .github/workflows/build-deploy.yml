@@ -46,7 +46,7 @@ jobs:
 
     - name: Prepare Web Download
       run: |
-        copy target\release\forlenza-scada.exe web\ForlenzaScada.exe
+        copy target\release\forlenza-scada.exe web\ForlenzaSCADA.exe
 
     - name: Upload to FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
