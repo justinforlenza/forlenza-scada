@@ -3,9 +3,8 @@ name: Build and Upload Rust App
 on:
   push:
     branches: [ main ]
-    paths-ignore: 
+    paths-ignore:
       - 'README.md'
-      - 'web/**'
 
 env:
   CARGO_TERM_COLOR: always
@@ -36,11 +35,6 @@ jobs:
 
     - name: Build application
       run: cargo build --release --verbose
-    
-    - name: Prepare output directory
-      run: |
-        mkdir output
-        copy target\release\forlenza-scada.exe output\ForlenzaScada.exe
 
     - name: Upload artifacts
       uses: actions/upload-artifact@v4
@@ -49,11 +43,16 @@ jobs:
         path: target/release/forlenza-scada.exe
         retention-days: 30
 
+
+    - name: Prepare Web Download
+      run: |
+        copy target\release\forlenza-scada.exe web\ForlenzaScada.exe
+
     - name: Upload to FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
       with:
         server: ${{ secrets.FTP_HOST }}
         username: ${{ secrets.FTP_USER }}
         password: ${{ secrets.FTP_PASS }}
-        local-dir: output/
-        server-dir: /htdocs/downloads/
+        local-dir: web/
+        server-dir: /htdocs/
