@@ -1541,7 +1541,14 @@
             var alarm = document.getElementById(alarmId);
             if (alarm) {
                 alarm.className = 'alarm-item acknowledged';
-                var ackBtn = alarm.getElementsByClassName('ack-button')[0];
+                var ackBtns = alarm.getElementsByTagName('button');
+                var ackBtn = null;
+                for (var i = 0; i < ackBtns.length; i++) {
+                    if (ackBtns[i].className.indexOf('ack-button') !== -1) {
+                        ackBtn = ackBtns[i];
+                        break;
+                    }
+                }
                 if (ackBtn) {
                     ackBtn.innerHTML = 'ACK\'D';
                     ackBtn.disabled = true;
@@ -1614,7 +1621,7 @@
 
             var alarm = alarms[Math.floor(Math.random() * alarms.length)];
             var num = Math.floor(Math.random() * 500) + 100;
-            var newId = 'alarm-' + Date.now();
+            var newId = 'alarm-' + new Date().getTime();
 
             var newAlarm = document.createElement('div');
             newAlarm.className = 'alarm-item ' + alarm.priority;
