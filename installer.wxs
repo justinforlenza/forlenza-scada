@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <!-- Product Definition -->
+  <Product Id="*"
+           Name="Forlenza SCADA Control System"
+           Language="1033"
+           Version="2.1.0.0"
+           Manufacturer="Forlenza Industrial Systems"
+           UpgradeCode="12345678-1234-5678-9012-123456789012">
+
+    <!-- Package Configuration -->
+    <Package InstallerVersion="200"
+             Compressed="yes"
+             InstallScope="perMachine"
+             Description="Industrial SCADA Control System - Educational Simulation"
+             Comments="Simulates a realistic industrial control interface for educational purposes" />
+
+    <!-- Media Configuration -->
+    <MediaTemplate EmbedCab="yes" />
+
+    <!-- Major Upgrade Configuration -->
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+
+    <!-- Directory Structure -->
+    <Directory Id="TARGETDIR" Name="SourceDir">
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Forlenza Industrial">
+          <Directory Id="SCADAFOLDER" Name="SCADA Control System" />
+        </Directory>
+      </Directory>
+
+      <!-- Desktop and Start Menu -->
+      <Directory Id="ProgramMenuFolder">
+        <Directory Id="ApplicationProgramsFolder" Name="Forlenza Industrial" />
+      </Directory>
+      <Directory Id="DesktopFolder" Name="Desktop" />
+    </Directory>
+
+    <!-- Features -->
+    <Feature Id="ProductFeature" Title="SCADA Control System" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="ShortcutComponents" />
+    </Feature>
+
+    <!-- Main Application Components -->
+    <ComponentGroup Id="ProductComponents" Directory="SCADAFOLDER">
+      <!-- Main Executable -->
+      <Component Id="MainExecutable" Guid="*">
+        <File Id="ForlenzaSCADAExe"
+              Source="target\release\forlenza-scada.exe"
+              KeyPath="yes"
+              Name="forlenza-scada.exe" />
+      </Component>
+
+      <!-- Visual C++ Redistributables -->
+      <Component Id="VCRedist64" Guid="*">
+        <File Id="VCRedist64Exe"
+              Source="web\VC_redist.x64.exe"
+              KeyPath="yes" />
+      </Component>
+
+      <Component Id="VCRedist32" Guid="*">
+        <File Id="VCRedist32Exe"
+              Source="web\VC_redist.x86.exe"
+              KeyPath="yes" />
+      </Component>
+
+      <!-- Registry Entries -->
+      <Component Id="RegistryEntries" Guid="*">
+        <RegistryKey Root="HKLM" Key="Software\Forlenza Industrial\SCADA Control System">
+          <RegistryValue Name="InstallLocation" Type="string" Value="[SCADAFOLDER]" KeyPath="yes" />
+          <RegistryValue Name="Version" Type="string" Value="2.1.0" />
+          <RegistryValue Name="Publisher" Type="string" Value="Forlenza Industrial Systems" />
+          <RegistryValue Name="InstallDate" Type="string" Value="[Date]" />
+        </RegistryKey>
+
+        <!-- Uninstall Registry Entry -->
+        <RegistryKey Root="HKLM" Key="Software\Microsoft\Windows\CurrentVersion\Uninstall\{12345678-1234-5678-9012-123456789012}">
+          <RegistryValue Name="DisplayName" Type="string" Value="Forlenza SCADA Control System" />
+          <RegistryValue Name="DisplayVersion" Type="string" Value="2.1.0.0" />
+          <RegistryValue Name="Publisher" Type="string" Value="Forlenza Industrial Systems" />
+          <RegistryValue Name="InstallLocation" Type="string" Value="[SCADAFOLDER]" />
+          <RegistryValue Name="UninstallString" Type="string" Value="[System64Folder]msiexec.exe /x [ProductCode]" />
+          <RegistryValue Name="EstimatedSize" Type="integer" Value="2048" />
+          <RegistryValue Name="NoModify" Type="integer" Value="1" />
+          <RegistryValue Name="NoRepair" Type="integer" Value="1" />
+        </RegistryKey>
+      </Component>
+    </ComponentGroup>
+
+    <!-- Shortcuts -->
+    <ComponentGroup Id="ShortcutComponents">
+      <!-- Start Menu Shortcut -->
+      <Component Id="ApplicationShortcut" Directory="ApplicationProgramsFolder" Guid="*">
+        <Shortcut Id="ApplicationStartMenuShortcut"
+                  Name="SCADA Control System"
+                  Description="Industrial SCADA Control Interface"
+                  Target="[#ForlenzaSCADAExe]"
+                  WorkingDirectory="SCADAFOLDER"
+                  Icon="SCADAIcon.exe" />
+        <RemoveFolder Id="ApplicationProgramsFolder" On="uninstall" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\Forlenza Industrial\SCADA"
+                       Name="installed"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes" />
+      </Component>
+
+      <!-- Desktop Shortcut -->
+      <Component Id="DesktopShortcut" Directory="DesktopFolder" Guid="*">
+        <Shortcut Id="ApplicationDesktopShortcut"
+                  Name="SCADA Control System"
+                  Description="Industrial SCADA Control Interface"
+                  Target="[#ForlenzaSCADAExe]"
+                  WorkingDirectory="SCADAFOLDER"
+                  Icon="SCADAIcon.exe" />
+        <RegistryValue Root="HKCU"
+                       Key="Software\Forlenza Industrial\SCADA"
+                       Name="desktop_shortcut"
+                       Type="integer"
+                       Value="1"
+                       KeyPath="yes" />
+      </Component>
+    </ComponentGroup>
+
+    <!-- Icon Definition -->
+    <Icon Id="SCADAIcon.exe" SourceFile="src\icon.ico" />
+
+    <!-- Custom Actions for VC++ Redistributables -->
+    <CustomAction Id="InstallVCRedist64"
+                  FileKey="VCRedist64Exe"
+                  ExeCommand="/quiet /norestart"
+                  Execute="deferred"
+                  Return="ignore"
+                  Impersonate="no" />
+
+    <CustomAction Id="InstallVCRedist32"
+                  FileKey="VCRedist32Exe"
+                  ExeCommand="/quiet /norestart"
+                  Execute="deferred"
+                  Return="ignore"
+                  Impersonate="no" />
+
+    <!-- Installation Sequence -->
+    <InstallExecuteSequence>
+      <Custom Action="InstallVCRedist64" After="InstallFiles">NOT Installed</Custom>
+      <Custom Action="InstallVCRedist32" After="InstallVCRedist64">NOT Installed</Custom>
+    </InstallExecuteSequence>
+
+    <!-- UI Reference -->
+    <UIRef Id="WixUI_InstallDir" />
+    <Property Id="WIXUI_INSTALLDIR" Value="SCADAFOLDER" />
+
+  </Product>
+</Wix>
