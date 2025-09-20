@@ -45,8 +45,8 @@
 
         body {
             font-family: monospace;
-            background-color: #008080;
-            color: #000000;
+            background-color: #2d2d30;
+            color: #ffffff;
             overflow: scroll;
             cursor: default;
             -webkit-user-select: none;
@@ -60,34 +60,81 @@
         }
 
         .content {
-            background-color: #c0c0c0;
+            background-color: #3c3c3c;
             padding: 8px;
         }
 
         /* Menu bar */
         .menubar {
-            background-color: #c0c0c0;
-            border-bottom: 1px solid #ffffff;
-            padding: 2px 0;
+            background-color: #404040;
+            border-bottom: 1px solid #606060;
+            border-top: 1px solid #808080;
+            padding: 0;
+            height: 22px;
+            font-size: 11px;
         }
 
         .menu-item {
             display: inline-block;
-            padding: 4px 8px;
+            padding: 4px 12px;
             font-size: 11px;
-            color: #000000;
+            color: #ffffff;
             cursor: default;
+            height: 14px;
+            line-height: 14px;
+            border-right: 1px solid #606060;
+            position: relative;
         }
 
         .menu-item:hover {
-            background-color: #000080;
+            background-color: #0078d4;
             color: #ffffff;
+        }
+
+        .menu-item:first-child {
+            border-left: 1px solid #606060;
+        }
+
+        .menu-dropdown {
+            display: none;
+            position: absolute;
+            top: 22px;
+            left: -1px;
+            background-color: #404040;
+            border: 1px solid #606060;
+            border-top: none;
+            min-width: 150px;
+            z-index: 1000;
+        }
+
+        .menu-item:hover .menu-dropdown {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: block;
+            padding: 4px 16px;
+            font-size: 11px;
+            color: #ffffff;
+            border-bottom: 1px solid #606060;
+            cursor: default;
+        }
+
+        .dropdown-item:hover {
+            background-color: #0078d4;
+            color: #ffffff;
+        }
+
+        .dropdown-separator {
+            height: 1px;
+            background-color: #808080;
+            margin: 2px 0;
         }
 
         /* Status bar */
         .statusbar {
-            background-color: #c0c0c0;
-            border-top: 1px solid #ffffff;
+            background-color: #404040;
+            border-top: 1px solid #606060;
             padding: 2px 4px;
             font-size: 11px;
             position: fixed;
@@ -95,27 +142,29 @@
             left: 0;
             right: 0;
             height: 18px;
+            color: #ffffff;
         }
 
         .status-section {
             border: 1px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
+            border-color: #606060 #808080 #808080 #606060;
             display: inline-block;
             padding: 2px 6px;
             margin-right: 4px;
+            background-color: #3c3c3c;
         }
 
         /* Panels */
         .panel {
-            background-color: #c0c0c0;
+            background-color: #3c3c3c;
             border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
+            border-color: #606060 #808080 #808080 #606060;
             margin: 8px;
             padding: 4px;
         }
 
         .panel-title {
-            background: #000080;
+            background: #0078d4;
             color: #ffffff;
             padding: 2px 4px;
             font-size: 11px;
@@ -204,20 +253,20 @@
 
         /* Buttons */
         .button {
-            background-color: #c0c0c0;
+            background-color: #505050;
             border: 2px solid;
-            border-color: #ffffff #808080 #808080 #ffffff;
+            border-color: #808080 #404040 #404040 #808080;
             padding: 4px 12px;
             font-size: 11px;
             font-family: "Tahoma", "MS Sans Serif", sans-serif;
-            color: #000000;
+            color: #ffffff;
             cursor: pointer;
             display: inline-block;
             margin: 2px;
         }
 
         .button:active {
-            border-color: #808080 #ffffff #ffffff #808080;
+            border-color: #404040 #808080 #808080 #404040;
             padding: 5px 11px 3px 13px;
         }
 
@@ -248,21 +297,21 @@
 
         .left-panel {
             width: 220px;
-            background-color: #808080;
+            background-color: #2d2d30;
         }
 
         .center-left-panel {
-            width: 300px;
-            background-color: #c0c0c0;
+            width: 350px;
+            background-color: #2d2d30;
         }
 
         .center-right-panel {
-            background-color: #c0c0c0;
+            background-color: #2d2d30;
         }
 
         .right-panel {
             width: 280px;
-            background-color: #808080;
+            background-color: #2d2d30;
         }
 
         /* Alarm list */
@@ -281,10 +330,69 @@
             font-family: "Courier New", monospace;
             font-size: 10px;
             padding: 2px 0;
+            border-bottom: 1px solid #404040;
+            display: table;
+            width: 100%;
+        }
+
+        .alarm-item.high {
+            color: #ff0000;
+            background-color: #400000;
+        }
+
+        .alarm-item.medium {
+            color: #ffff00;
+            background-color: #404000;
+        }
+
+        .alarm-item.low {
+            color: #ffa500;
+            background-color: #403000;
+        }
+
+        .alarm-item.acknowledged {
+            color: #808080;
+            background-color: #202020;
         }
 
         .alarm-time {
-            color: #ffff00;
+            color: #00ffff;
+            display: table-cell;
+            width: 60px;
+        }
+
+        .alarm-priority {
+            display: table-cell;
+            width: 25px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .alarm-text {
+            display: table-cell;
+        }
+
+        .alarm-ack-btn {
+            display: table-cell;
+            width: 30px;
+            text-align: center;
+        }
+
+        .ack-button {
+            background-color: #505050;
+            border: 1px solid #808080;
+            color: #ffffff;
+            font-size: 8px;
+            padding: 1px 3px;
+            cursor: pointer;
+        }
+
+        .ack-button:hover {
+            background-color: #0078d4;
+        }
+
+        .ack-button:active {
+            background-color: #005a9e;
         }
 
         /* Gauge meter */
@@ -346,17 +454,18 @@
         }
 
         .process-table th {
-            background-color: #808080;
+            background-color: #0078d4;
             color: #ffffff;
             padding: 2px 4px;
             text-align: left;
-            border: 1px solid #c0c0c0;
+            border: 1px solid #606060;
         }
 
         .process-table td {
             padding: 2px 4px;
-            border: 1px solid #808080;
-            background-color: #ffffff;
+            border: 1px solid #606060;
+            background-color: #3c3c3c;
+            color: #ffffff;
         }
 
         /* Tank level gauge */
@@ -406,13 +515,14 @@
             padding: 4px;
             margin: 4px;
             position: relative;
+            overflow: hidden;
         }
 
         .bar-chart-bar {
             display: inline-block;
             background-color: #00ff00;
-            width: 20px;
-            margin: 0 2px;
+            width: 30px;
+            margin: 0 1px;
             position: absolute;
             bottom: 4px;
         }
@@ -423,7 +533,7 @@
             border: 2px solid;
             border-color: #808080 #ffffff #ffffff #808080;
             height: 120px;
-            width: 280px;
+            width: auto;
             padding: 4px;
             margin: 4px;
             position: relative;
@@ -474,12 +584,33 @@
 
         /* Process mimic */
         .process-mimic {
-            height: 120px;
-            background-color: #f0f0f0;
+            height: 140px;
+            background-color: #1e1e1e;
             border: 2px solid;
-            border-color: #808080 #ffffff #ffffff #808080;
+            border-color: #606060 #808080 #808080 #606060;
             position: relative;
             margin: 4px;
+            overflow: hidden;
+        }
+
+        .tag-label {
+            position: absolute;
+            font-size: 8px;
+            font-weight: bold;
+            background-color: #ffff80;
+            padding: 1px 3px;
+            border: 1px solid #000000;
+            color: #000080;
+        }
+
+        .instrument-tag {
+            position: absolute;
+            font-size: 7px;
+            font-family: "Courier New", monospace;
+            background-color: #c0ffc0;
+            padding: 1px 2px;
+            border: 1px solid #008000;
+            color: #008000;
         }
 
         .pipe-horizontal {
@@ -517,9 +648,13 @@
         .equipment-tank {
             width: 25px;
             height: 35px;
-            background-color: #c0c0c0;
+            background-color: #d0d0d0;
             border: 2px solid #000000;
             position: absolute;
+        }
+
+        .equipment-tank.active {
+            background-color: #a0c0ff;
         }
 
         .equipment-pump {
@@ -534,19 +669,53 @@
             line-height: 16px;
         }
 
+        .equipment-pump.running {
+            background-color: #40ff40;
+            animation: none;
+        }
+
         .equipment-valve {
-            width: 12px;
-            height: 12px;
+            width: 14px;
+            height: 14px;
             background-color: #ffff80;
             border: 2px solid #000000;
             position: absolute;
+            transform: rotate(45deg);
+        }
+
+        .equipment-valve.open {
+            background-color: #80ff80;
+        }
+
+        .equipment-valve.closed {
+            background-color: #ff8080;
         }
 
         .equipment-reactor {
             width: 40px;
             height: 45px;
-            background-color: #ff8080;
+            background-color: #ff9090;
             border: 2px solid #000000;
+            position: absolute;
+        }
+
+        .equipment-reactor.active {
+            background-color: #ff6060;
+        }
+
+        .equipment-heat-exchanger {
+            width: 30px;
+            height: 20px;
+            background-color: #c0c0ff;
+            border: 2px solid #000000;
+            position: absolute;
+        }
+
+        .equipment-sensor {
+            width: 8px;
+            height: 8px;
+            background-color: #ffa500;
+            border: 1px solid #000000;
             position: absolute;
         }
 
@@ -554,9 +723,10 @@
             position: absolute;
             font-size: 8px;
             font-weight: bold;
-            background-color: #ffffff;
+            background-color: #404040;
+            color: #ffffff;
             padding: 1px 2px;
-            border: 1px solid #000000;
+            border: 1px solid #808080;
         }
 
         /* Motor status */
@@ -650,6 +820,78 @@
 
 <body>
 
+    <div class="menubar">
+        <div class="menu-item">
+            File
+            <div class="menu-dropdown">
+                <div class="dropdown-item" onclick="menuAction('file-new')">New Project</div>
+                <div class="dropdown-item" onclick="menuAction('file-open')">Open Project</div>
+                <div class="dropdown-item" onclick="menuAction('file-save')">Save Project</div>
+                <div class="dropdown-separator"></div>
+                <div class="dropdown-item" onclick="menuAction('file-export')">Export Data</div>
+                <div class="dropdown-item" onclick="menuAction('file-print')">Print Screen</div>
+                <div class="dropdown-separator"></div>
+                <div class="dropdown-item" onclick="menuAction('file-exit')">Exit</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            View
+            <div class="menu-dropdown">
+                <div class="dropdown-item" onclick="menuAction('view-overview')">Process Overview</div>
+                <div class="dropdown-item" onclick="menuAction('view-trends')">Trend Display</div>
+                <div class="dropdown-item" onclick="menuAction('view-alarms')">Alarm Summary</div>
+                <div class="dropdown-item" onclick="menuAction('view-reports')">Reports</div>
+                <div class="dropdown-separator"></div>
+                <div class="dropdown-item" onclick="menuAction('view-fullscreen')">Full Screen</div>
+                <div class="dropdown-item" onclick="menuAction('view-refresh')">Refresh Display</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            Control
+            <div class="menu-dropdown">
+                <div class="dropdown-item" onclick="menuAction('control-auto')">Auto Mode</div>
+                <div class="dropdown-item" onclick="menuAction('control-manual')">Manual Mode</div>
+                <div class="dropdown-separator"></div>
+                <div class="dropdown-item" onclick="menuAction('control-start')">Start Process</div>
+                <div class="dropdown-item" onclick="menuAction('control-stop')">Stop Process</div>
+                <div class="dropdown-item" onclick="menuAction('control-estop')">Emergency Stop</div>
+                <div class="dropdown-separator"></div>
+                <div class="dropdown-item" onclick="menuAction('control-setpoints')">Setpoint Editor</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            Alarms
+            <div class="menu-dropdown">
+                <div class="dropdown-item" onclick="menuAction('alarm-active')">Active Alarms</div>
+                <div class="dropdown-item" onclick="menuAction('alarm-history')">Alarm History</div>
+                <div class="dropdown-item" onclick="menuAction('alarm-ack-all')">Acknowledge All</div>
+                <div class="dropdown-separator"></div>
+                <div class="dropdown-item" onclick="menuAction('alarm-config')">Alarm Configuration</div>
+                <div class="dropdown-item" onclick="menuAction('alarm-silence')">Silence Horn</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            Tools
+            <div class="menu-dropdown">
+                <div class="dropdown-item" onclick="menuAction('tools-calibrate')">Calibration</div>
+                <div class="dropdown-item" onclick="menuAction('tools-diagnostics')">Diagnostics</div>
+                <div class="dropdown-item" onclick="menuAction('tools-backup')">Backup Database</div>
+                <div class="dropdown-separator"></div>
+                <div class="dropdown-item" onclick="menuAction('tools-settings')">System Settings</div>
+                <div class="dropdown-item" onclick="menuAction('tools-users')">User Management</div>
+            </div>
+        </div>
+        <div class="menu-item">
+            Help
+            <div class="menu-dropdown">
+                <div class="dropdown-item" onclick="menuAction('help-manual')">User Manual</div>
+                <div class="dropdown-item" onclick="menuAction('help-shortcuts')">Keyboard Shortcuts</div>
+                <div class="dropdown-separator"></div>
+                <div class="dropdown-item" onclick="menuAction('help-about')">About SCADA</div>
+            </div>
+        </div>
+    </div>
+
     <div class="grid-container">
         <div class="grid-row">
             <div class="grid-cell left-panel">
@@ -685,10 +927,14 @@
 
                 <div class="panel">
                     <div class="panel-title">CONTROL</div>
-                    <button class="button" onclick="buttonClick('START')">START</button>
-                    <button class="button" onclick="buttonClick('STOP')">STOP</button>
-                    <button class="button" onclick="buttonClick('RESET')">RESET</button>
-                    <button class="button emergency" onclick="emergencyStop()">EMERGENCY<br />STOP</button>
+                    <center>
+                        <button class="button" onclick="buttonClick('START')">START</button>
+                        <button class="button" onclick="buttonClick('STOP')">STOP</button>
+                        <button class="button" onclick="buttonClick('RESET')">RESET</button>
+                    </center>
+                    <center>
+                        <button class="button emergency" onclick="emergencyStop()">EMERGENCY<br />STOP</button>
+                    </center>
                 </div>
 
                 <div class="panel">
@@ -744,67 +990,68 @@
 
             <div class="grid-cell center-right-panel">
                 <div class="panel">
-                    <div class="panel-title">PROCESS MIMIC</div>
+                    <div class="panel-title">PROCESS MIMIC - REACTOR UNIT #1</div>
                     <div class="process-mimic">
                         <!-- Feed Tank FT-01 -->
-                        <div class="equipment-tank" style="top: 30px; left: 15px;"></div>
-                        <div class="equipment-label" style="top: 70px; left: 12px;">FT-01</div>
+                        <div class="equipment-tank active" style="top: 25px; left: 15px;"></div>
+                        <div class="equipment-label" style="top: 65px; left: 12px;">FT-101</div>
 
                         <!-- Feed line from tank -->
-                        <div class="pipe-horizontal" style="width: 20px; top: 45px; left: 40px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 45px;">→</div>
+                        <div class="pipe-horizontal" style="width: 20px; top: 42px; left: 42px;"></div>
+                        <div class="flow-arrow" style="top: 38px; left: 47px;">→</div>
 
                         <!-- Feed Pump P-01 -->
-                        <div class="equipment-pump" style="top: 37px; left: 65px;">P</div>
-                        <div class="equipment-label" style="top: 60px; left: 62px;">P-01</div>
+                        <div class="equipment-pump running" style="top: 34px; left: 67px;">P</div>
+                        <div class="equipment-label" style="top: 57px; left: 64px;">P-101</div>
 
                         <!-- Line to Control Valve -->
-                        <div class="pipe-horizontal" style="width: 15px; top: 45px; left: 90px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 95px;">→</div>
+                        <div class="pipe-horizontal" style="width: 15px; top: 42px; left: 92px;"></div>
+                        <div class="flow-arrow" style="top: 38px; left: 97px;">→</div>
 
                         <!-- Control Valve FV-101 -->
-                        <div class="equipment-valve" style="top: 39px; left: 110px;"></div>
-                        <div class="equipment-label" style="top: 60px; left: 105px;">FV-101</div>
+                        <div class="equipment-valve open" style="top: 36px; left: 112px;"></div>
+                        <div class="equipment-label" style="top: 55px; left: 107px;">FV-101</div>
 
                         <!-- Line to Reactor -->
-                        <div class="pipe-horizontal" style="width: 20px; top: 45px; left: 125px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 130px;">→</div>
+                        <div class="pipe-horizontal" style="width: 20px; top: 42px; left: 130px;"></div>
+                        <div class="flow-arrow" style="top: 38px; left: 135px;">→</div>
 
                         <!-- Reactor R-01 -->
-                        <div class="equipment-reactor" style="top: 25px; left: 150px;"></div>
-                        <div class="equipment-label" style="top: 75px; left: 162px;">R-01</div>
+                        <div class="equipment-reactor active" style="top: 20px; left: 155px;"></div>
+                        <div class="equipment-label" style="top: 70px; left: 164px;">R-101</div>
+
+                        <!-- Heat Exchanger -->
+                        <div class="equipment-heat-exchanger" style="top: 90px; left: 160px;"></div>
+                        <div class="equipment-label" style="top: 115px; left: 164px;">HX-101</div>
 
                         <!-- Product line from reactor -->
-                        <div class="pipe-horizontal pipe-product" style="width: 20px; top: 45px; left: 195px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 200px;">→</div>
+                        <div class="pipe-horizontal pipe-product" style="width: 20px; top: 42px; left: 200px;"></div>
+                        <div class="flow-arrow" style="top: 38px; left: 205px;">→</div>
 
                         <!-- Product Valve PV-102 -->
-                        <div class="equipment-valve" style="top: 39px; left: 220px;"></div>
-                        <div class="equipment-label" style="top: 60px; left: 215px;">PV-102</div>
+                        <div class="equipment-valve open" style="top: 36px; left: 225px;"></div>
+                        <div class="equipment-label" style="top: 55px; left: 220px;">PV-102</div>
 
                         <!-- Line to Product Tank -->
-                        <div class="pipe-horizontal pipe-product" style="width: 15px; top: 45px; left: 235px;"></div>
-                        <div class="flow-arrow" style="top: 41px; left: 240px;">→</div>
+                        <div class="pipe-horizontal pipe-product" style="width: 15px; top: 42px; left: 243px;"></div>
+                        <div class="flow-arrow" style="top: 38px; left: 248px;">→</div>
 
                         <!-- Product Tank PT-01 -->
-                        <div class="equipment-tank" style="top: 30px; left: 255px;"></div>
-                        <div class="equipment-label" style="top: 70px; left: 252px;">PT-01</div>
+                        <div class="equipment-tank active" style="top: 25px; left: 263px;"></div>
+                        <div class="equipment-label" style="top: 65px; left: 258px;">PT-101</div>
 
                         <!-- Recirculation line -->
-                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 50px; left: 170px;"></div>
-                        <div class="pipe-horizontal pipe-recycle" style="width: 115px; top: 75px; left: 55px;"></div>
-                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 50px; left: 75px;"></div>
-                        <div class="flow-arrow" style="top: 71px; left: 100px;">←</div>
-                        <div class="flow-arrow" style="top: 56px; left: 166px;">↓</div>
-                        <div class="flow-arrow" style="top: 56px; left: 71px;">↑</div>
+                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 47px; left: 175px;"></div>
+                        <div class="pipe-horizontal pipe-recycle" style="width: 115px; top: 72px; left: 57px;"></div>
+                        <div class="pipe-vertical pipe-recycle" style="height: 25px; top: 47px; left: 77px;"></div>
+                        <div class="flow-arrow" style="top: 68px; left: 100px;">←</div>
+                        <div class="flow-arrow" style="top: 53px; left: 171px;">↓</div>
+                        <div class="flow-arrow" style="top: 53px; left: 73px;">↑</div>
 
                         <!-- Flow indicators -->
-                        <div style="position: absolute; top: 25px; left: 45px; font-size: 8px; color: #0000ff;">850 L/m
-                        </div>
-                        <div style="position: absolute; top: 25px; left: 200px; font-size: 8px; color: #008000;">620 L/m
-                        </div>
-                        <div style="position: absolute; top: 85px; left: 100px; font-size: 8px; color: #cccc00;">230 L/m
-                        </div>
+                        <div style="position: absolute; top: 25px; left: 45px; font-size: 8px; color: #0000ff;">850 L/m</div>
+                        <div style="position: absolute; top: 25px; left: 200px; font-size: 8px; color: #008000;">620 L/m</div>
+                        <div style="position: absolute; top: 85px; left: 100px; font-size: 8px; color: #cccc00;">230 L/m</div>
                     </div>
                 </div>
 
@@ -813,7 +1060,7 @@
 
                     <div style="text-align: center;">
                         <div class="gauge-container">
-                            <div class="gauge-label">TEMPERATURE</div>
+                            <div class="gauge-label">TT-201 REACTOR</div>
                             <div class="gauge-meter">
                                 <div class="gauge-needle" id="temp-needle"></div>
                             </div>
@@ -821,7 +1068,7 @@
                         </div>
 
                         <div class="gauge-container">
-                            <div class="gauge-label">PRESSURE</div>
+                            <div class="gauge-label">PT-201 REACTOR</div>
                             <div class="gauge-meter">
                                 <div class="gauge-needle" id="pressure-needle"></div>
                             </div>
@@ -829,7 +1076,7 @@
                         </div>
 
                         <div class="gauge-container">
-                            <div class="gauge-label">FLOW RATE</div>
+                            <div class="gauge-label">FT-101 FEED</div>
                             <div class="gauge-meter">
                                 <div class="gauge-needle" id="flow-needle"></div>
                             </div>
@@ -838,15 +1085,19 @@
                     </div>
 
                     <div style="margin-top: 10px;">
-                        <span class="display-label">REACTOR TEMP:</span>
+                        <span class="display-label">TT-201 REACTOR:</span>
                         <span class="digital-display" id="reactor-temp">0185.7</span>
-                        <span class="display-label">COOLANT TEMP:</span>
+                        <span style="font-size: 9px;">°C</span>
+                        <span class="display-label">TT-301 COOLANT:</span>
                         <span class="digital-display" id="coolant-temp">0045.2</span>
+                        <span style="font-size: 9px;">°C</span>
                         <br />
-                        <span class="display-label">SYSTEM PRESS:</span>
+                        <span class="display-label">PT-201 REACTOR:</span>
                         <span class="digital-display" id="sys-pressure">002.45</span>
-                        <span class="display-label">FLOW TOTAL:</span>
+                        <span style="font-size: 9px;">bar</span>
+                        <span class="display-label">FQT-101 TOTAL:</span>
                         <span class="digital-display" id="flow-total">48576</span>
+                        <span style="font-size: 9px;">L</span>
                     </div>
                 </div>
 
@@ -854,8 +1105,8 @@
                     <div class="panel-title">TREND CHARTS</div>
                     <div class="trend-chart" id="trend-chart">
                         <div class="trend-grid"></div>
-                        <canvas id="trend-canvas" width="272" height="112"
-                            style="position: absolute; top: 4px; left: 4px;"></canvas>
+                        <canvas id="trend-canvas"
+                            style="position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px;"></canvas>
                     </div>
                     <div style="font-size: 9px; text-align: center; margin-top: 4px;">
                         <span style="color: #00ff00;">TEMP</span> |
@@ -868,14 +1119,14 @@
                 <div class="panel">
                     <div class="panel-title">PRODUCTION CHART</div>
                     <div class="bar-chart" id="bar-chart">
-                        <div class="bar-chart-bar" id="bar1" style="left: 10px; height: 60px;"></div>
-                        <div class="bar-chart-bar" id="bar2" style="left: 35px; height: 45px;"></div>
-                        <div class="bar-chart-bar" id="bar3" style="left: 60px; height: 75px;"></div>
-                        <div class="bar-chart-bar" id="bar4" style="left: 85px; height: 55px;"></div>
-                        <div class="bar-chart-bar" id="bar5" style="left: 110px; height: 80px;"></div>
-                        <div class="bar-chart-bar" id="bar6" style="left: 135px; height: 65px;"></div>
-                        <div class="bar-chart-bar" id="bar7" style="left: 160px; height: 70px;"></div>
-                        <div class="bar-chart-bar" id="bar8" style="left: 185px; height: 50px;"></div>
+                        <div class="bar-chart-bar" id="bar1" style="left: 8px; height: 60px;"></div>
+                        <div class="bar-chart-bar" id="bar2" style="left: 40px; height: 45px;"></div>
+                        <div class="bar-chart-bar" id="bar3" style="left: 72px; height: 75px;"></div>
+                        <div class="bar-chart-bar" id="bar4" style="left: 104px; height: 55px;"></div>
+                        <div class="bar-chart-bar" id="bar5" style="left: 136px; height: 80px;"></div>
+                        <div class="bar-chart-bar" id="bar6" style="left: 168px; height: 65px;"></div>
+                        <div class="bar-chart-bar" id="bar7" style="left: 200px; height: 70px;"></div>
+                        <div class="bar-chart-bar" id="bar8" style="left: 232px; height: 50px;"></div>
                     </div>
                     <div style="font-size: 9px; text-align: center; margin-top: 4px;">HOURLY PRODUCTION (UNITS)</div>
                 </div>
@@ -889,7 +1140,7 @@
 
                     <div style="text-align: center;">
                         <div class="gauge-container">
-                            <div class="gauge-label">VIBRATION</div>
+                            <div class="gauge-label">VT-101 P-101</div>
                             <div class="vibration-gauge" id="vibration-display">
                                 <div class="vibration-bar" id="vib-bar-1" style="left: 5px; height: 20px;"></div>
                                 <div class="vibration-bar" id="vib-bar-2" style="left: 10px; height: 15px;"></div>
@@ -906,7 +1157,7 @@
                         </div>
 
                         <div class="gauge-container">
-                            <div class="gauge-label">POWER</div>
+                            <div class="gauge-label">WT-101 MOTOR</div>
                             <div class="gauge-meter">
                                 <div class="gauge-needle" id="power-needle"></div>
                             </div>
@@ -914,11 +1165,11 @@
                         </div>
 
                         <div class="gauge-container">
-                            <div class="gauge-label">pH LEVEL</div>
+                            <div class="gauge-label">AT-201 REACTOR</div>
                             <div class="gauge-meter">
                                 <div class="gauge-needle" id="ph-needle"></div>
                             </div>
-                            <div class="gauge-value" id="ph-value">7.2</div>
+                            <div class="gauge-value" id="ph-value">7.2 pH</div>
                         </div>
                     </div>
 
@@ -933,7 +1184,7 @@
                                 <div style="position: absolute; bottom: 0;">0</div>
                             </div>
                         </div>
-                        <div class="tank-label">TANK A<br /><span id="tank1-value">65.2%</span></div>
+                        <div class="tank-label">LT-101<br />FEED TANK<br /><span id="tank1-value">65.2%</span></div>
 
                         <div class="tank-gauge" style="display: inline-block;">
                             <div class="tank-liquid" id="tank2-level" style="height: 43%;"></div>
@@ -945,7 +1196,7 @@
                                 <div style="position: absolute; bottom: 0;">0</div>
                             </div>
                         </div>
-                        <div class="tank-label">TANK B<br /><span id="tank2-value">43.8%</span></div>
+                        <div class="tank-label">LT-201<br />REACTOR<br /><span id="tank2-value">43.8%</span></div>
 
                         <div class="tank-gauge" style="display: inline-block;">
                             <div class="tank-liquid" id="tank3-level" style="height: 78%;"></div>
@@ -957,7 +1208,7 @@
                                 <div style="position: absolute; bottom: 0;">0</div>
                             </div>
                         </div>
-                        <div class="tank-label">TANK C<br /><span id="tank3-value">78.1%</span></div>
+                        <div class="tank-label">LT-301<br />PRODUCT<br /><span id="tank3-value">78.1%</span></div>
                     </div>
                 </div>
 
@@ -989,17 +1240,30 @@
 
 
                 <div class="panel">
-                    <div class="panel-title">ACTIVE ALARMS</div>
+                    <div class="panel-title">ACTIVE ALARMS [3 UNACK]</div>
                     <div class="alarm-list" id="alarm-list">
-                        <div class="alarm-item">
-                            <span class="alarm-time">[14:23:45]</span> HIGH TEMP WARNING - REACTOR 2
+                        <div class="alarm-item high" id="alarm-1">
+                            <span class="alarm-time">14:23:45</span>
+                            <span class="alarm-priority">H</span>
+                            <span class="alarm-text">TT-201 HIGH TEMP - REACTOR</span>
+                            <span class="alarm-ack-btn"><button class="ack-button" onclick="ackAlarm('alarm-1')">ACK</button></span>
                         </div>
-                        <div class="alarm-item">
-                            <span class="alarm-time">[14:18:12]</span> LOW PRESSURE ALERT - LINE 4
+                        <div class="alarm-item medium" id="alarm-2">
+                            <span class="alarm-time">14:18:12</span>
+                            <span class="alarm-priority">M</span>
+                            <span class="alarm-text">PT-201 LOW PRESSURE - LINE 4</span>
+                            <span class="alarm-ack-btn"><button class="ack-button" onclick="ackAlarm('alarm-2')">ACK</button></span>
                         </div>
-                        <div class="alarm-item">
-                            <span class="alarm-time">[13:55:08]</span> VALVE VLV-502 STUCK
+                        <div class="alarm-item low" id="alarm-3">
+                            <span class="alarm-time">13:55:08</span>
+                            <span class="alarm-priority">L</span>
+                            <span class="alarm-text">VLV-502 POSITION FAULT</span>
+                            <span class="alarm-ack-btn"><button class="ack-button" onclick="ackAlarm('alarm-3')">ACK</button></span>
                         </div>
+                    </div>
+                    <div style="text-align: center; margin-top: 4px;">
+                        <button class="button" onclick="acknowledgeAll()" style="font-size: 9px; padding: 2px 8px;">ACK ALL</button>
+                        <button class="button" onclick="clearAcknowledged()" style="font-size: 9px; padding: 2px 8px;">CLEAR</button>
                     </div>
                 </div>
 
@@ -1034,9 +1298,12 @@
         </div>
 
         <div class="statusbar">
-            <span class="status-section">COMM: OK</span>
-            <span class="status-section">MODE: AUTO</span>
-            <span class="status-section">USER: OPERATOR</span>
+            <span class="status-section">PLC COMM: ONLINE</span>
+            <span class="status-section">HMI NODE: WS-01</span>
+            <span class="status-section">MODE: AUTOMATIC</span>
+            <span class="status-section">USER: OPERATOR_01</span>
+            <span class="status-section">STATION: REACTOR_CTRL</span>
+            <span class="status-section">ALARMS: <span id="status-alarms">3</span></span>
             <span class="status-section" id="clock">00:00:00</span>
         </div>
     </div>
@@ -1156,6 +1423,107 @@
         }
         setInterval(updateRuntime, 1000);
 
+        // Menu handler
+        function menuAction(action) {
+            switch(action) {
+                case 'file-new':
+                    alert('SCADA SYSTEM\n\nCreate new project configuration.');
+                    break;
+                case 'file-open':
+                    alert('SCADA SYSTEM\n\nSelect project file to open.');
+                    break;
+                case 'file-save':
+                    alert('SCADA SYSTEM\n\nProject configuration saved.');
+                    break;
+                case 'file-export':
+                    alert('SCADA SYSTEM\n\nExporting historical data...');
+                    break;
+                case 'file-print':
+                    window.print();
+                    break;
+                case 'file-exit':
+                    if (confirm('Exit SCADA Application?\n\nAre you sure?')) {
+                        alert('SCADA SYSTEM\n\nShutting down safely...');
+                    }
+                    break;
+                case 'view-overview':
+                    alert('SCADA SYSTEM\n\nSwitching to Process Overview.');
+                    break;
+                case 'view-trends':
+                    alert('SCADA SYSTEM\n\nOpening Trend Display.');
+                    break;
+                case 'view-alarms':
+                    alert('SCADA SYSTEM\n\nDisplaying Alarm Summary.');
+                    break;
+                case 'view-reports':
+                    alert('SCADA SYSTEM\n\nGenerating Production Reports.');
+                    break;
+                case 'view-fullscreen':
+                    alert('SCADA SYSTEM\n\nToggling full screen mode.');
+                    break;
+                case 'view-refresh':
+                    location.reload();
+                    break;
+                case 'control-auto':
+                    alert('SCADA CONTROL\n\nSwitching to Automatic Mode.');
+                    break;
+                case 'control-manual':
+                    alert('SCADA CONTROL\n\nSwitching to Manual Mode.');
+                    break;
+                case 'control-start':
+                    alert('SCADA CONTROL\n\nStarting process sequence.');
+                    break;
+                case 'control-stop':
+                    alert('SCADA CONTROL\n\nStopping process sequence.');
+                    break;
+                case 'control-estop':
+                    emergencyStop();
+                    break;
+                case 'control-setpoints':
+                    alert('SCADA CONTROL\n\nOpening Setpoint Editor.');
+                    break;
+                case 'alarm-active':
+                    alert('SCADA ALARMS\n\nDisplaying active alarms.');
+                    break;
+                case 'alarm-history':
+                    alert('SCADA ALARMS\n\nOpening alarm history.');
+                    break;
+                case 'alarm-ack-all':
+                    alert('SCADA ALARMS\n\nAcknowledging all active alarms.');
+                    break;
+                case 'alarm-config':
+                    alert('SCADA ALARMS\n\nOpening alarm configuration.');
+                    break;
+                case 'alarm-silence':
+                    alert('SCADA ALARMS\n\nSilencing alarm horn.');
+                    break;
+                case 'tools-calibrate':
+                    alert('SCADA TOOLS\n\nStarting instrument calibration.');
+                    break;
+                case 'tools-diagnostics':
+                    alert('SCADA TOOLS\n\nRunning system diagnostics.');
+                    break;
+                case 'tools-backup':
+                    alert('SCADA TOOLS\n\nBacking up system database.');
+                    break;
+                case 'tools-settings':
+                    alert('SCADA TOOLS\n\nOpening system settings.');
+                    break;
+                case 'tools-users':
+                    alert('SCADA TOOLS\n\nUser management interface.');
+                    break;
+                case 'help-manual':
+                    alert('SCADA HELP\n\nOpening user manual.');
+                    break;
+                case 'help-shortcuts':
+                    alert('SCADA HELP\n\nKeyboard Shortcuts:\nF1 - Help\nF5 - Refresh\nF11 - Full Screen\nESC - Emergency Stop');
+                    break;
+                case 'help-about':
+                    alert('Forlenza Industrial SCADA Control System\nVersion 2.1\n\nCopyright 2007 Forlenza Industrial Systems\nAll rights reserved.');
+                    break;
+            }
+        }
+
         // Button handlers
         function buttonClick(action) {
             alert('SCADA CONTROL\n\nCommand: ' + action + '\n\nCommand sent to PLC.');
@@ -1169,28 +1537,96 @@
             }
         }
 
+        // Alarm acknowledgment functions
+        function ackAlarm(alarmId) {
+            var alarm = document.getElementById(alarmId);
+            if (alarm) {
+                alarm.className = 'alarm-item acknowledged';
+                var ackBtn = alarm.getElementsByClassName('ack-button')[0];
+                if (ackBtn) {
+                    ackBtn.innerHTML = 'ACK\'D';
+                    ackBtn.disabled = true;
+                    ackBtn.style.backgroundColor = '#606060';
+                }
+                updateAlarmCount();
+            }
+        }
+
+        function acknowledgeAll() {
+            var alarms = document.getElementsByClassName('alarm-item');
+            for (var i = 0; i < alarms.length; i++) {
+                if (alarms[i].className.indexOf('acknowledged') === -1) {
+                    alarms[i].className = 'alarm-item acknowledged';
+                    var ackBtn = alarms[i].getElementsByClassName('ack-button')[0];
+                    if (ackBtn) {
+                        ackBtn.innerHTML = 'ACK\'D';
+                        ackBtn.disabled = true;
+                        ackBtn.style.backgroundColor = '#606060';
+                    }
+                }
+            }
+            updateAlarmCount();
+        }
+
+        function clearAcknowledged() {
+            var alarmList = document.getElementById('alarm-list');
+            var alarms = alarmList.getElementsByClassName('alarm-item');
+            for (var i = alarms.length - 1; i >= 0; i--) {
+                if (alarms[i].className.indexOf('acknowledged') !== -1) {
+                    alarmList.removeChild(alarms[i]);
+                }
+            }
+            updateAlarmCount();
+        }
+
+        function updateAlarmCount() {
+            var alarms = document.getElementsByClassName('alarm-item');
+            var unackCount = 0;
+            for (var i = 0; i < alarms.length; i++) {
+                if (alarms[i].className.indexOf('acknowledged') === -1) {
+                    unackCount++;
+                }
+            }
+            var title = document.querySelector('#alarm-list').parentNode.querySelector('.panel-title');
+            title.innerHTML = 'ACTIVE ALARMS [' + unackCount + ' UNACK]';
+
+            // Update status bar alarm count
+            var statusAlarms = document.getElementById('status-alarms');
+            if (statusAlarms) {
+                statusAlarms.innerHTML = unackCount;
+            }
+        }
+
         // Add new alarm periodically
         function addAlarm() {
             var alarmList = document.getElementById('alarm-list');
             var now = new Date();
-            var time = '[' + ('0' + now.getHours()).slice(-2) + ':' +
+            var time = ('0' + now.getHours()).slice(-2) + ':' +
                 ('0' + now.getMinutes()).slice(-2) + ':' +
-                ('0' + now.getSeconds()).slice(-2) + ']';
+                ('0' + now.getSeconds()).slice(-2);
 
             var alarms = [
-                'VALVE POSITION DEVIATION - VLV-',
-                'TEMPERATURE RISING - ZONE ',
-                'PUMP VIBRATION HIGH - PUMP-',
-                'FLOW RATE LOW - LINE ',
-                'PRESSURE DIFFERENTIAL - FILTER-'
+                { text: 'VLV-501 POSITION DEVIATION', priority: 'medium' },
+                { text: 'TT-301 TEMPERATURE RISING', priority: 'high' },
+                { text: 'P-102 VIBRATION HIGH', priority: 'low' },
+                { text: 'FT-401 FLOW RATE LOW', priority: 'medium' },
+                { text: 'PT-101 PRESSURE DIFFERENTIAL', priority: 'high' }
             ];
 
             var alarm = alarms[Math.floor(Math.random() * alarms.length)];
             var num = Math.floor(Math.random() * 500) + 100;
+            var newId = 'alarm-' + Date.now();
 
             var newAlarm = document.createElement('div');
-            newAlarm.className = 'alarm-item';
-            newAlarm.innerHTML = '<span class="alarm-time">' + time + '</span> ' + alarm + num;
+            newAlarm.className = 'alarm-item ' + alarm.priority;
+            newAlarm.id = newId;
+
+            var priorityLetter = alarm.priority.charAt(0).toUpperCase();
+            newAlarm.innerHTML =
+                '<span class="alarm-time">' + time + '</span>' +
+                '<span class="alarm-priority">' + priorityLetter + '</span>' +
+                '<span class="alarm-text">' + alarm.text + ' ' + num + '</span>' +
+                '<span class="alarm-ack-btn"><button class="ack-button" onclick="ackAlarm(\'' + newId + '\')">ACK</button></span>';
 
             alarmList.insertBefore(newAlarm, alarmList.firstChild);
 
@@ -1198,6 +1634,8 @@
             while (alarmList.children.length > 10) {
                 alarmList.removeChild(alarmList.lastChild);
             }
+
+            updateAlarmCount();
         }
         setInterval(addAlarm, 30000);
 
@@ -1259,15 +1697,17 @@
             document.getElementById('efficiency').innerHTML = efficiency.toFixed(1) + '%';
 
             // Update bar chart
+            var barPositions = [8, 40, 72, 104, 136, 168, 200, 232];
             for (var j = 1; j <= 8; j++) {
                 var bar = document.getElementById('bar' + j);
-                var height = 40 + Math.random() * 60;
+                var height = 40 + Math.random() * 100;
                 bar.style.height = height + 'px';
+                bar.style.left = barPositions[j - 1] + 'px';
 
                 // Color coding for production levels
-                if (height > 80) {
+                if (height > 100) {
                     bar.style.backgroundColor = '#00ff00';
-                } else if (height > 60) {
+                } else if (height > 70) {
                     bar.style.backgroundColor = '#ffff00';
                 } else {
                     bar.style.backgroundColor = '#ff8000';
@@ -1303,9 +1743,20 @@
             var canvas = document.getElementById('trend-canvas');
             if (!canvas || !canvas.getContext) return; // IE8 fallback
 
+            // Dynamic canvas sizing based on container
+            var container = document.getElementById('trend-chart');
+            var containerWidth = container.offsetWidth || container.clientWidth || 280;
+            var containerHeight = container.offsetHeight || container.clientHeight || 120;
+
+            // Account for padding
+            var width = containerWidth - 8;
+            var height = containerHeight - 8;
+
+            // Set canvas dimensions
+            canvas.width = width;
+            canvas.height = height;
+
             var ctx = canvas.getContext('2d');
-            var width = canvas.width;
-            var height = canvas.height;
 
             // Clear canvas
             ctx.clearRect(0, 0, width, height);
