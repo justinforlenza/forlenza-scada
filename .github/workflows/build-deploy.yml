@@ -43,10 +43,18 @@ jobs:
         path: target/release/forlenza-scada.exe
         retention-days: 30
 
+    - name: Add msbuild to PATH
+      uses: microsoft/setup-msbuild@v2
+
+    - name: Install WiX
+      run: dotnet tool install --global wix
+
+    - name: Build WiX on Windows
+      run: wix build .\installer.wxs
 
     - name: Prepare Web Download
       run: |
-        copy target\release\forlenza-scada.exe web\ForlenzaSCADA.exe
+        copy installer.msi web\ForlenzaSCADAInstaller.msi
 
     - name: Upload to FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
