@@ -552,11 +552,58 @@
             background-color: #00ff00;
         }
 
+        /* IE8-compatible grid background using repeating table elements */
         .trend-grid {
             position: absolute;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"><rect width="20" height="20" fill="none" stroke="%23404040" stroke-width="1"/></svg>');
+            background-color: #000000;
+        }
+
+        .trend-grid-table {
+            width: 100%;
+            height: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        .trend-grid-cell {
+            border: 1px solid #404040;
+            padding: 0;
+            width: 10%;
+            height: 20px;
+        }
+
+        .trend-plot-area {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+        }
+
+        .trend-point {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            border-radius: 1px;
+        }
+
+        .trend-point.temp {
+            background-color: #00ff00;
+        }
+
+        .trend-point.pressure {
+            background-color: #ffff00;
+        }
+
+        .trend-point.flow {
+            background-color: #ff0000;
+        }
+
+        .trend-point.level {
+            background-color: #00ffff;
         }
 
         /* Valve controls */
@@ -1110,9 +1157,71 @@
                 <div class="panel">
                     <div class="panel-title">TREND CHARTS</div>
                     <div class="trend-chart" id="trend-chart">
-                        <div class="trend-grid"></div>
-                        <canvas id="trend-canvas"
-                            style="position: absolute; top: 4px; left: 4px; right: 4px; bottom: 4px;"></canvas>
+                        <div class="trend-grid">
+                            <table class="trend-grid-table">
+                                <tr>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                </tr>
+                                <tr>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                    <td class="trend-grid-cell"></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="trend-plot-area" id="trend-plot-area"></div>
                     </div>
                     <div style="font-size: 9px; text-align: center; margin-top: 4px;">
                         <span style="color: #00ff00;">TEMP</span> |
@@ -1470,6 +1579,7 @@
                 case 'file-exit':
                     if (confirm('Exit SCADA Application?\n\nAre you sure?')) {
                         alert('SCADA SYSTEM\n\nShutting down safely...');
+                        window.close();
                     }
                     break;
                 case 'view-overview':
@@ -1762,7 +1872,7 @@
             }
         }
 
-        // Trend chart implementation using canvas
+        // IE8-compatible trend chart implementation using positioned divs
         var trendData = {
             temp: [],
             pressure: [],
@@ -1771,26 +1881,31 @@
         };
 
         function updateTrendChart() {
-            var canvas = document.getElementById('trend-canvas');
-            if (!canvas || !canvas.getContext) return; // IE8 fallback
+            var plotArea = document.getElementById('trend-plot-area');
+            if (!plotArea) return;
 
-            // Dynamic canvas sizing based on container
+            // Get container dimensions with IE8 compatibility
             var container = document.getElementById('trend-chart');
-            var containerWidth = container.offsetWidth || container.clientWidth || 280;
-            var containerHeight = container.offsetHeight || container.clientHeight || 120;
+            var width = 280; // Default width
+            var height = 120; // Default height
+
+            // Try to get actual dimensions
+            try {
+                if (container.offsetWidth && container.offsetWidth > 0) {
+                    width = container.offsetWidth;
+                }
+                if (container.offsetHeight && container.offsetHeight > 0) {
+                    height = container.offsetHeight;
+                }
+            } catch (e) {
+                // Fallback to defaults if error occurs
+                width = 280;
+                height = 120;
+            }
 
             // Account for padding
-            var width = containerWidth - 8;
-            var height = containerHeight - 8;
-
-            // Set canvas dimensions
-            canvas.width = width;
-            canvas.height = height;
-
-            var ctx = canvas.getContext('2d');
-
-            // Clear canvas
-            ctx.clearRect(0, 0, width, height);
+            width = width - 8;
+            height = height - 8;
 
             // Add new data points
             var temp = 170 + Math.random() * 20;
@@ -1803,40 +1918,56 @@
             trendData.flow.push(flow);
             trendData.level.push(level);
 
-            // Keep only last 50 points
-            if (trendData.temp.length > 50) {
+            // Keep only last 30 points (fewer for IE8 performance)
+            if (trendData.temp.length > 30) {
                 trendData.temp.shift();
                 trendData.pressure.shift();
                 trendData.flow.shift();
                 trendData.level.shift();
             }
 
-            // Draw trend lines
-            function drawTrendLine(data, color, scale, offset) {
-                if (data.length < 2) return;
+            // Clear existing points
+            plotArea.innerHTML = '';
 
-                ctx.strokeStyle = color;
-                ctx.lineWidth = 1;
-                ctx.beginPath();
+            // Draw trend points using positioned divs
+            function drawTrendPoints(data, className, scale, offset) {
+                if (data.length === 0) return;
 
                 for (var i = 0; i < data.length; i++) {
-                    var x = (i / (data.length - 1)) * width;
-                    var y = height - ((data[i] - offset) / scale * height);
+                    var point = document.createElement('div');
+                    point.className = 'trend-point ' + className;
 
-                    if (i === 0) {
-                        ctx.moveTo(x, y);
-                    } else {
-                        ctx.lineTo(x, y);
+                    // Calculate positions with safety checks
+                    var x = 0;
+                    var y = 0;
+
+                    if (data.length > 1) {
+                        x = (i / (data.length - 1)) * (width - 4);
                     }
+                    y = height - 4 - ((data[i] - offset) / scale * (height - 8));
+
+                    // Ensure valid numeric values
+                    if (isNaN(x) || x < 0) x = 0;
+                    if (isNaN(y) || y < 0) y = 0;
+                    if (x > width - 4) x = width - 4;
+                    if (y > height - 4) y = height - 4;
+
+                    // Convert to integers to avoid IE8 issues
+                    x = Math.round(x);
+                    y = Math.round(y);
+
+                    point.style.left = x + 'px';
+                    point.style.top = y + 'px';
+
+                    plotArea.appendChild(point);
                 }
-                ctx.stroke();
             }
 
-            // Draw each trend line with different colors and scales
-            drawTrendLine(trendData.temp, '#00ff00', 30, 160);     // Green for temp (160-190 range)
-            drawTrendLine(trendData.pressure, '#ffff00', 2, 1.5);  // Yellow for pressure (1.5-3.5 range)
-            drawTrendLine(trendData.flow, '#ff0000', 200, 750);    // Red for flow (750-950 range)
-            drawTrendLine(trendData.level, '#00ffff', 40, 50);     // Cyan for level (50-90 range)
+            // Draw each trend with different colors and scales
+            drawTrendPoints(trendData.temp, 'temp', 30, 160);        // Green for temp (160-190 range)
+            drawTrendPoints(trendData.pressure, 'pressure', 2, 1.5); // Yellow for pressure (1.5-3.5 range)
+            drawTrendPoints(trendData.flow, 'flow', 200, 750);       // Red for flow (750-950 range)
+            drawTrendPoints(trendData.level, 'level', 40, 50);       // Cyan for level (50-90 range)
         }
 
         setInterval(updateTrendChart, 5000);
