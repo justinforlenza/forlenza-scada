@@ -521,8 +521,7 @@
         .bar-chart-bar {
             display: inline-block;
             background-color: #00ff00;
-            width: 30px;
-            margin: 0 1px;
+            width: 10%;
             position: absolute;
             bottom: 4px;
         }
@@ -1119,14 +1118,14 @@
                 <div class="panel">
                     <div class="panel-title">PRODUCTION CHART</div>
                     <div class="bar-chart" id="bar-chart">
-                        <div class="bar-chart-bar" id="bar1" style="left: 8px; height: 60px;"></div>
-                        <div class="bar-chart-bar" id="bar2" style="left: 40px; height: 45px;"></div>
-                        <div class="bar-chart-bar" id="bar3" style="left: 72px; height: 75px;"></div>
-                        <div class="bar-chart-bar" id="bar4" style="left: 104px; height: 55px;"></div>
-                        <div class="bar-chart-bar" id="bar5" style="left: 136px; height: 80px;"></div>
-                        <div class="bar-chart-bar" id="bar6" style="left: 168px; height: 65px;"></div>
-                        <div class="bar-chart-bar" id="bar7" style="left: 200px; height: 70px;"></div>
-                        <div class="bar-chart-bar" id="bar8" style="left: 232px; height: 50px;"></div>
+                        <div class="bar-chart-bar" id="bar1" style="left: 2%; height: 60px;"></div>
+                        <div class="bar-chart-bar" id="bar2" style="left: 14%; height: 45px;"></div>
+                        <div class="bar-chart-bar" id="bar3" style="left: 26%; height: 75px;"></div>
+                        <div class="bar-chart-bar" id="bar4" style="left: 38%; height: 55px;"></div>
+                        <div class="bar-chart-bar" id="bar5" style="left: 50%; height: 80px;"></div>
+                        <div class="bar-chart-bar" id="bar6" style="left: 62%; height: 65px;"></div>
+                        <div class="bar-chart-bar" id="bar7" style="left: 74%; height: 70px;"></div>
+                        <div class="bar-chart-bar" id="bar8" style="left: 86%; height: 50px;"></div>
                     </div>
                     <div style="font-size: 9px; text-align: center; margin-top: 4px;">HOURLY PRODUCTION (UNITS)</div>
                 </div>
@@ -1697,12 +1696,10 @@
             document.getElementById('efficiency').innerHTML = efficiency.toFixed(1) + '%';
 
             // Update bar chart
-            var barPositions = [8, 40, 72, 104, 136, 168, 200, 232];
             for (var j = 1; j <= 8; j++) {
                 var bar = document.getElementById('bar' + j);
                 var height = 40 + Math.random() * 100;
                 bar.style.height = height + 'px';
-                bar.style.left = barPositions[j - 1] + 'px';
 
                 // Color coding for production levels
                 if (height > 100) {
