@@ -19,21 +19,14 @@
 
     <!-- Registry search to detect if Visual C++ Redistributable is already installed -->
     <!-- VC++ 2015-2022 all use the same registry key location -->
+    <!-- Check for the Installed value which should be 1 if installed -->
     <util:RegistrySearch
       Id="SearchVCRedist2015x64"
       Root="HKLM"
       Key="SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64"
       Value="Installed"
-      Result="exists"
+      Result="value"
       Variable="VCRedist2015x64Installed" />
-
-    <util:RegistrySearch
-      Id="SearchVCRedist2017x64"
-      Root="HKLM"
-      Key="SOFTWARE\Wow6432Node\Microsoft\VisualStudio\14.0\VC\Runtimes\x64"
-      Value="Installed"
-      Result="exists"
-      Variable="VCRedist2017x64Installed" />
 
     <!-- Chain of packages to install -->
     <Chain>
@@ -48,7 +41,7 @@
         UninstallCommand="/uninstall /quiet /norestart"
         PerMachine="yes"
         Permanent="yes"
-        DetectCondition="VCRedist2015x64Installed OR VCRedist2017x64Installed"
+        DetectCondition="VCRedist2015x64Installed"
         InstallCondition="VersionNT64"
         Vital="yes"
         Compressed="yes">
