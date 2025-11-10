@@ -49,12 +49,15 @@ jobs:
     - name: Install WiX
       run: dotnet tool install --global wix
 
-    - name: Build WiX on Windows
+    - name: Build WiX MSI
       run: wix build .\installer.wxs
+
+    - name: Build WiX Bundle with VC++ Redistributable
+      run: wix build .\bundle.wxs -ext WixToolset.Bal.wixext -ext WixToolset.Util.wixext
 
     - name: Prepare Web Download
       run: |
-        copy installer.msi web\ForlenzaSCADAInstaller.msi
+        copy bundle.exe web\ForlenzaSCADAInstaller.exe
 
     - name: Upload to FTP
       uses: SamKirkland/FTP-Deploy-Action@v4.3.5
