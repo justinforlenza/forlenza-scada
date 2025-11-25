@@ -56,11 +56,11 @@
             <th>Description</th>
         </tr>
         <tr>
-            <td><a href="ForlenzaSCADAInstaller.msi">ForlenzaSCADAInstaller.msi</a></td>
+            <td><a href="ForlenzaSCADAInstaller.exe">ForlenzaSCADAInstaller.exe</a></td>
             <td>2.1.0</td>
-            <td>4.2 MB</td>
+            <td>5.5 MB</td>
             <td>03/15/2010</td>
-            <td>Full installation package</td>
+            <td>Full installation package (includes VC++ redistributable)</td>
         </tr>
         <tr>
             <td><a href="Patch211.exe">Patch211.exe</a></td>
@@ -97,11 +97,11 @@
 
     <div class="faq-question">Q: I get an error "This program can't start because VCRUNTIME140.DLL is missing from your computer" when launching SCADA. How do I fix this?</div>
     <div class="faq-answer">
-        <b>A:</b> This error indicates you need to install the Microsoft Visual C++ Redistributable package.
-        <br>Download and install the Visual C++ Redistributable:
+        <b>A:</b> This error should not occur with the latest installer (ForlenzaSCADAInstaller.exe) as it automatically installs the required Visual C++ Redistributable package.
+        <br>If you installed using an older version, download and install the Visual C++ Redistributable manually:
        <li> <a href="VC_redist.x64.exe" target="_blank">VC_redist.x64.exe</a></li>
        <li> <a href="VC_redist.x86.exe" target="_blank">VC_redist.x86.exe</a></li>
-        Restart your computer after installation.
+        Restart your computer after installation, or download and reinstall using the latest installer.
     </div>
 
     <div class="faq-question">Q: How do I configure communication with my Allen-Bradley PLC?</div>

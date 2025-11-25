@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://wixtoolset.org/schemas/v4/wxs"
+     xmlns:bal="http://wixtoolset.org/schemas/v4/wxs/bal"
+     xmlns:util="http://wixtoolset.org/schemas/v4/wxs/util">
+  
+  <Bundle Name="Forlenza SCADA Control System"
+          Version="2.1.0.0"
+          Manufacturer="Forlenza Industrial Systems"
+          UpgradeCode="87654321-4321-8765-9012-098765432109"
+  >
+
+    <!-- Display bootstrap application UI -->
+    <BootstrapperApplication>
+      <bal:WixStandardBootstrapperApplication 
+        LicenseUrl=""
+        Theme="hyperlinkLicense"
+        ShowVersion="yes" />
+    </BootstrapperApplication>
+
+    <!-- Registry search to detect if Visual C++ Redistributable is already installed -->
+    <!-- VC++ 2015-2022 all use the same registry key location -->
+    <!-- Check for the Installed value which should be 1 if installed -->
+    <util:RegistrySearch
+      Id="SearchVCRedist2015x64"
+      Root="HKLM"
+      Key="SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64"
+      Value="Installed"
+      Result="value"
+      Variable="VCRedist2015x64Installed" />
+
+    <!-- Chain of packages to install -->
+    <Chain>
+      <!-- Visual C++ 2015-2022 Redistributable (x64) -->
+      <!-- The 2015-2022 redistributables are all compatible and share registry keys -->
+      <ExePackage
+        Id="VCRedist_x64"
+        SourceFile="web\VC_redist.x64.exe"
+        DownloadUrl="https://aka.ms/vs/17/release/vc_redist.x64.exe"
+        InstallArguments="/install /quiet /norestart"
+        RepairArguments="/repair /quiet /norestart"
+        UninstallArguments="/uninstall /quiet /norestart"
+        PerMachine="yes"
+        Permanent="yes"
+        DetectCondition="VCRedist2015x64Installed"
+        InstallCondition="VersionNT64"
+        Vital="yes"
+        Compressed="yes">
+        <ExitCode Value="0" Behavior="success" />
+        <ExitCode Value="3010" Behavior="forceReboot" />
+      </ExePackage>
+
+      <!-- Main MSI Package -->
+      <MsiPackage
+        Id="MainMSI"
+        SourceFile="installer.msi"
+        Vital="yes"
+        Compressed="yes">
+      </MsiPackage>
+    </Chain>
+  </Bundle>
+</Wix>
