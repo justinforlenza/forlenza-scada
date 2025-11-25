@@ -9,3 +9,7 @@ Cargo.lock
 
 
 .vscode/
+
+*.msi
+.wix/
+*.wixpdb
