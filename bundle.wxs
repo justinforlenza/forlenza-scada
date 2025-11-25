@@ -7,7 +7,7 @@
           Version="2.1.0.0"
           Manufacturer="Forlenza Industrial Systems"
           UpgradeCode="87654321-4321-8765-9012-098765432109"
-          IconSourceFile="src\icon.ico">
+  >
 
     <!-- Display bootstrap application UI -->
     <BootstrapperApplication>
@@ -36,9 +36,9 @@
         Id="VCRedist_x64"
         SourceFile="web\VC_redist.x64.exe"
         DownloadUrl="https://aka.ms/vs/17/release/vc_redist.x64.exe"
-        InstallCommand="/install /quiet /norestart"
-        RepairCommand="/repair /quiet /norestart"
-        UninstallCommand="/uninstall /quiet /norestart"
+        InstallArguments="/install /quiet /norestart"
+        RepairArguments="/repair /quiet /norestart"
+        UninstallArguments="/uninstall /quiet /norestart"
         PerMachine="yes"
         Permanent="yes"
         DetectCondition="VCRedist2015x64Installed"

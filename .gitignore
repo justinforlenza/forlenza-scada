@@ -10,6 +10,8 @@ Cargo.lock
 
 .vscode/
 
-*.msi
 .wix/
 *.wixpdb
+
+installer.msi
+bundle.exe

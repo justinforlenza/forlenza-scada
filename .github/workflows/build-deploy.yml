@@ -51,14 +51,14 @@ jobs:
 
     - name: Install WiX Extensions
       run: |
-        wix extension add WixToolset.Bal.wixext
+        wix extension add WixToolset.BootstrapperApplications.wixext
         wix extension add WixToolset.Util.wixext
 
     - name: Build WiX MSI
       run: wix build .\installer.wxs
 
     - name: Build WiX Bundle with VC++ Redistributable
-      run: wix build .\bundle.wxs -ext WixToolset.Bal.wixext -ext WixToolset.Util.wixext
+      run: wix build .\bundle.wxs -ext WixToolset.BootstrapperApplications.wixext -ext WixToolset.Util.wixext
 
     - name: Prepare Web Download
       run: |
